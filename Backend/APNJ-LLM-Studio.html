@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APNJ Jarvis</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root {
+  --bg:#fefefc;--bg2:#ffffff;--bg3:#fafdfb;--bg4:#f5fbf8;--bg5:#ecf5f0;
+  --border:rgba(20,50,45,0.07);--border2:rgba(20,50,45,0.11);--border3:rgba(20,50,45,0.17);
+  --text:#3a5450;--text2:#4f6b65;--text3:#6f8781;
+  --accent:#1f8a80;--accent2:#3d789e;--accent3:#c25a3f;--accent4:#9c7726;--accent5:#7c66a8;
+  --mono:'IBM Plex Mono',monospace;--sans:'Sora',sans-serif;
+  --sidebar-w:230px;--right-w:270px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;height:100vh;overflow:hidden;display:flex;flex-direction:column;user-select:none;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px;}::-webkit-scrollbar-thumb:hover{background:var(--bg4);}
+.topbar{height:54px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:16px;flex-shrink:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;min-width:170px;}
+.logo-mark{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;color:#000;flex-shrink:0;}
+.logo-name{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--text);white-space:nowrap;letter-spacing:0.2px;}
+.logo-name span{color:var(--accent);}
+.topbar-center{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;}
+.server-pill{display:flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--bg3);font-family:var(--mono);font-size:11px;cursor:pointer;transition:all 0.15s;}
+.server-pill:hover{border-color:var(--border3);}
+.server-pill.connected{border-color:rgba(31,138,128,0.3);background:rgba(31,138,128,0.06);color:var(--accent);}
+.server-pill.disconnected{border-color:rgba(194,90,63,0.3);background:rgba(194,90,63,0.06);color:var(--accent3);}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.connected .status-dot{background:var(--accent);animation:blink 2s infinite;}
+.disconnected .status-dot{background:var(--accent3);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+@keyframes pulse-border{0%,100%{border-color:var(--accent4)}50%{border-color:transparent}}
+.topbar-right{display:flex;align-items:center;gap:6px;min-width:170px;justify-content:flex-end;}
+.tbtn{width:34px;height:34px;border-radius:7px;background:transparent;border:1px solid var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:all 0.15s;}
+.tbtn:hover{background:var(--bg3);color:var(--text2);border-color:var(--border2);}
+.tbtn.active{color:var(--accent);border-color:rgba(31,138,128,0.35);background:rgba(31,138,128,0.07);}
+.layout{display:flex;flex:1;overflow:hidden;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
+.sidebar-scroll{overflow-y:auto;flex:1;padding-bottom:12px;}
+.sec-label{font-family:var(--sans);font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--text3);padding:14px 14px 6px;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:8px 14px;color:var(--text2);font-size:13px;cursor:pointer;border-radius:0;transition:all 0.12s;position:relative;}
+.nav-item:hover{color:var(--text);background:rgba(20,50,45,0.03);}
+.nav-item.active{color:var(--accent);background:rgba(31,138,128,0.07);border-right:2px solid var(--accent);}
+.nav-item i{font-size:16px;width:18px;text-align:center;}
+.nav-badge{margin-left:auto;font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--bg4);color:var(--text3);}
+.nav-badge.g{background:rgba(31,138,128,0.15);color:var(--accent);}
+.nav-badge.b{background:rgba(61,120,158,0.15);color:var(--accent2);}
+.model-list{padding:0 10px;}
+.model-card{padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;margin-bottom:6px;cursor:pointer;transition:all 0.15s;position:relative;}
+.model-card:hover{border-color:var(--border2);}
+.model-card.active{border-color:var(--accent);background:rgba(31,138,128,0.06);}
+.model-card.loading{border-color:var(--accent4);animation:pulse-border 1.5s infinite;}
+.model-card-header{display:flex;align-items:flex-start;justify-content:space-between;}
+.model-card-name{font-family:var(--mono);font-size:11px;color:var(--text);margin-bottom:5px;word-break:break-all;}
+.model-card-del{color:var(--text3);font-size:13px;cursor:pointer;padding:2px;border-radius:4px;transition:color 0.12s;flex-shrink:0;margin-left:4px;}
+.model-card-del:hover{color:var(--accent3);}
+.tag-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:5px;}
+.tag{font-size:9px;font-family:var(--mono);padding:2px 6px;border-radius:3px;}
+.tag-gpu{background:rgba(61,120,158,0.15);color:var(--accent2);}
+.tag-vision{background:rgba(194,90,63,0.15);color:var(--accent3);}
+.tag-code{background:rgba(156,119,38,0.15);color:var(--accent4);}
+.tag-embed{background:rgba(31,138,128,0.15);color:var(--accent);}
+.tag-gen{background:rgba(124,102,168,0.15);color:var(--accent5);}
+.model-card-meta{font-size:9px;color:var(--text3);font-family:var(--mono);}
+.add-model-btn{display:flex;align-items:center;justify-content:center;gap:7px;margin:6px 10px 4px;padding:8px;border:1px dashed var(--border2);border-radius:8px;color:var(--text3);font-size:12px;cursor:pointer;transition:all 0.15s;}
+.add-model-btn:hover{color:var(--accent);border-color:rgba(31,138,128,0.4);background:rgba(31,138,128,0.04);}
+.center{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.tabs{display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--border);padding:0 20px;flex-shrink:0;gap:2px;overflow-x:auto;}
+.tab{display:flex;align-items:center;gap:7px;padding:14px 16px;font-size:13px;font-family:var(--sans);font-weight:500;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.12s;white-space:nowrap;flex-shrink:0;}
+.tab:hover{color:var(--text2);}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab i{font-size:15px;}
+.panel-page{display:none;flex:1;flex-direction:column;overflow:hidden;min-width:0;}
+.panel-page.active{display:flex;}
+.chat-messages{flex:1;overflow-y:auto;padding:28px 32px;display:flex;flex-direction:column;gap:24px;}
+.welcome-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;padding:40px;text-align:center;}
+.welcome-mark{width:72px;height:72px;background:linear-gradient(135deg,rgba(31,138,128,0.18),rgba(61,120,158,0.18));border:1px solid rgba(31,138,128,0.25);border-radius:18px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent);}
+.welcome-title{font-family:var(--mono);font-size:20px;color:var(--text);}
+.welcome-sub{color:var(--text3);font-size:13px;max-width:420px;line-height:1.7;}
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:6px;width:100%;max-width:500px;}
+.qbtn{padding:13px 15px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;cursor:pointer;text-align:left;transition:all 0.15s;color:var(--text2);font-size:12px;line-height:1.5;}
+.qbtn:hover{border-color:rgba(31,138,128,0.4);color:var(--text);background:rgba(31,138,128,0.05);}
+.qbtn strong{display:block;color:var(--text);font-size:12px;margin-bottom:2px;font-family:var(--mono);}
+.msg{display:flex;flex-direction:column;gap:4px;max-width:760px;width:100%;}
+.msg-body{display:flex;flex-direction:column;gap:5px;}
+.msg-role{font-size:11px;font-family:var(--sans);font-weight:600;color:var(--text3);}
+.msg.ai .msg-role{color:var(--accent);}
+.msg-bubble{padding:0;font-size:14px;line-height:1.7;word-break:break-word;color:var(--text);}
+.msg.ai .msg-bubble{background:var(--bg3);border-radius:18px;padding:13px 16px;}
+.msg.user .msg-bubble{padding:0;}
+.msg-bubble pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px;overflow-x:auto;font-family:var(--mono);font-size:11px;margin:8px 0;color:var(--accent);}
+.msg-bubble code{font-family:var(--mono);font-size:11px;background:var(--bg4);padding:1px 5px;border-radius:3px;color:var(--accent4);}
+.typing-indicator{display:flex;gap:4px;align-items:center;padding:6px 0;}
+.typing-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);animation:bounce 1.2s infinite;}
+.typing-dot:nth-child(2){animation-delay:0.2s;}.typing-dot:nth-child(3){animation-delay:0.4s;}
+.input-zone{padding:14px 20px 18px;background:var(--bg2);border-top:1px solid var(--border);flex-shrink:0;position:relative;z-index:20;}
+.input-bar{display:flex;align-items:flex-end;gap:10px;background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:10px 12px 10px 16px;transition:border-color 0.15s;}
+.input-bar:focus-within{border-color:rgba(31,138,128,0.4);}
+.input-bar textarea{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--sans);font-size:13px;resize:none;line-height:1.6;max-height:130px;min-height:22px;}
+.input-bar textarea::placeholder{color:var(--text3);}
+.input-btns{display:flex;align-items:center;gap:5px;}
+.ibtn{width:32px;height:32px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text3);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all 0.12s;flex-shrink:0;position:relative;z-index:10;}
+.ibtn:hover{background:var(--bg4);color:var(--text2);}
+.send-btn{width:36px;height:36px;border-radius:9px;background:var(--accent);border:none;color:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:all 0.15s;flex-shrink:0;position:relative;z-index:10;}
+.send-btn:hover{background:#00f0c4;transform:scale(1.05);}
+.send-btn:disabled{background:var(--bg4);color:var(--text3);transform:none;cursor:not-allowed;}
+.input-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding:0 2px;}
+.chips{display:flex;align-items:center;gap:5px;}
+.chip{display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text3);font-size:10px;font-family:var(--mono);cursor:pointer;transition:all 0.12s;white-space:nowrap;}
+.chip:hover{border-color:var(--border2);color:var(--text2);}
+.chip.on{border-color:rgba(31,138,128,0.3);color:var(--accent);background:rgba(31,138,128,0.05);}
+.chip i{font-size:12px;}
+.input-hint{font-size:10px;font-family:var(--mono);color:var(--text3);white-space:nowrap;}
+.docs-panel{padding:20px 24px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
+.docs-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.pnl-btn{display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);font-size:12px;cursor:pointer;transition:all 0.12s;font-family:var(--mono);position:relative;z-index:10;}
+.pnl-btn:hover{border-color:var(--border3);color:var(--text);}
+.pnl-btn.primary{background:rgba(31,138,128,0.1);border-color:rgba(31,138,128,0.3);color:var(--accent);}
+.pnl-btn.primary:hover{background:rgba(31,138,128,0.18);}
+.pnl-btn.blue{background:rgba(61,120,158,0.1);border-color:rgba(61,120,158,0.3);color:var(--accent2);}
+.pnl-btn.blue:hover{background:rgba(61,120,158,0.18);}
+/* Path settings bar */
+.path-bar{background:var(--bg4);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.path-bar-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;}
+.path-bar-header:hover{color:var(--text2);}
+.path-bar-body{padding:12px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border);}
+.path-input-row{display:flex;align-items:center;gap:8px;}
+.path-label{font-family:var(--mono);font-size:10px;color:var(--text3);min-width:80px;}
+.path-input{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:11px;padding:6px 10px;outline:none;}
+.path-input:focus{border-color:rgba(31,138,128,0.4);}
+/* Answer box */
+.answer-box{background:var(--bg3);border:1px solid rgba(31,138,128,0.25);border-radius:16px;overflow:hidden;}
+.answer-header{padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(31,138,128,0.06);display:flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:12px;color:var(--accent);letter-spacing:0.3px;}
+.answer-text{padding:16px;font-size:13px;color:var(--text);line-height:1.7;white-space:pre-wrap;}
+.sources-box{background:var(--bg3);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.sources-header{padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--sans);font-weight:600;font-size:12px;color:var(--text2);letter-spacing:0.3px;}
+.source-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg4);border-radius:12px;font-family:var(--mono);font-size:10px;}
+.loading-bar{display:none;align-items:center;gap:12px;padding:16px;color:var(--text3);font-family:var(--mono);font-size:12px;}
+.spinner{width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;}
+.spinner.blue{border-color:var(--accent2);border-top-color:transparent;}
+/* PDF list */
+.pdf-list-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg4);border-radius:7px;border:1px solid var(--border);}
+.pdf-list-item input[type=checkbox]{margin-top:2px;flex-shrink:0;cursor:pointer;width:16px;height:16px;}
+.pdf-list-info{flex:1;min-width:0;}
+.pdf-list-title{font-size:12px;color:var(--text);margin-bottom:3px;word-break:break-word;}
+.pdf-list-url{font-size:10px;color:var(--text3);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.doc-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;position:relative;}
+.doc-card:hover{border-color:var(--border2);}
+.doc-card-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px;}
+.icon-pdf{background:rgba(194,90,63,0.15);color:var(--accent3);}
+.icon-xls{background:rgba(31,138,128,0.15);color:var(--accent);}
+.icon-doc{background:rgba(61,120,158,0.15);color:var(--accent2);}
+.icon-txt{background:rgba(124,102,168,0.15);color:var(--accent5);}
+.icon-csv{background:rgba(156,119,38,0.15);color:var(--accent4);}
+.icon-folder{background:rgba(156,119,38,0.12);color:var(--accent4);}
+.doc-card-name{font-size:12px;color:var(--text);margin-bottom:4px;word-break:break-word;line-height:1.4;}
+.doc-card-meta{font-size:10px;color:var(--text3);font-family:var(--mono);}
+.doc-card-del{position:absolute;top:8px;right:8px;color:var(--text3);font-size:13px;cursor:pointer;padding:3px;border-radius:4px;opacity:0;transition:all 0.12s;}
+.doc-card:hover .doc-card-del{opacity:1;}.doc-card-del:hover{color:var(--accent3);}
+.api-panel{padding:20px 24px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
+.api-block{background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.api-block-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg4);}
+.api-block-title{font-family:var(--mono);font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px;}
+.api-block-title i{font-size:15px;color:var(--accent);}
+.copy-btn{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:10px;font-family:var(--mono);cursor:pointer;transition:all 0.12s;}
+.copy-btn:hover{color:var(--accent);border-color:rgba(31,138,128,0.3);}
+.api-code{padding:14px 16px;font-family:var(--mono);font-size:11px;color:var(--accent);line-height:1.8;overflow-x:auto;white-space:pre;background:var(--bg);}
+.api-code .kw{color:var(--accent2);}.api-code .str{color:var(--accent4);}.api-code .cmt{color:var(--text3);}.api-code .num{color:var(--accent5);}
+.metrics-panel{padding:20px 24px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+.metric-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.metric-label{font-size:10px;font-family:var(--mono);color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;}
+.metric-value{font-size:26px;font-family:var(--mono);font-weight:700;color:var(--text);}
+.metric-value.g{color:var(--accent);}.metric-value.b{color:var(--accent2);}.metric-value.y{color:var(--accent4);}
+.metric-sub{font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--mono);}
+.bar-chart{display:flex;flex-direction:column;gap:8px;}
+.bar-row{display:flex;align-items:center;gap:10px;}
+.bar-lbl{font-size:11px;color:var(--text2);width:130px;flex-shrink:0;font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bar-track{flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;transition:width 0.5s;}
+.bar-val{font-size:10px;font-family:var(--mono);color:var(--text3);min-width:45px;text-align:right;}
+.right-panel{width:var(--right-w);background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+.rp-header{padding:12px 14px 10px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);display:flex;align-items:center;justify-content:space-between;}
+.rp-section{padding:12px 14px;border-bottom:1px solid var(--border);}
+.rp-title{font-family:var(--mono);font-size:9px;letter-spacing:1.3px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;}
+.g-bar-wrap{margin-bottom:8px;}
+.g-bar-top{display:flex;justify-content:space-between;font-size:10px;font-family:var(--mono);margin-bottom:4px;}
+.g-bar-top span:first-child{color:var(--text3);}.g-bar-top span:last-child{color:var(--text2);}
+.g-bar{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.g-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.6s;}
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;font-size:11px;}
+.stat-lbl{color:var(--text3);}
+.stat-val{font-family:var(--mono);font-size:10px;color:var(--text2);}
+.stat-val.g{color:var(--accent);}.stat-val.b{color:var(--accent2);}.stat-val.y{color:var(--accent4);}
+.rp-doc{display:flex;align-items:center;gap:8px;padding:6px 7px;border-radius:6px;cursor:pointer;transition:all 0.12s;margin-bottom:2px;}
+.rp-doc:hover{background:var(--bg3);}
+.rp-doc-icon{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.rp-doc-info{flex:1;min-width:0;}
+.rp-doc-name{font-size:11px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rp-doc-meta{font-size:9px;color:var(--text3);font-family:var(--mono);}
+.conn-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);}
+.conn-row:last-child{border-bottom:none;}
+.conn-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.c-excel{background:rgba(31,138,128,0.12);color:var(--accent);}
+.c-word{background:rgba(61,120,158,0.12);color:var(--accent2);}
+.c-api{background:rgba(156,119,38,0.12);color:var(--accent4);}
+.c-mcp{background:rgba(124,102,168,0.12);color:var(--accent5);}
+.conn-info{flex:1;min-width:0;}
+.conn-name{font-size:12px;color:var(--text);}
+.conn-meta{font-size:9px;color:var(--text3);font-family:var(--mono);}
+.toggle{width:32px;height:17px;border-radius:9px;background:var(--bg4);cursor:pointer;position:relative;transition:background 0.2s;border:1px solid var(--border2);flex-shrink:0;}
+.toggle.on{background:var(--accent);border-color:var(--accent);}
+.toggle::after{content:'';width:11px;height:11px;border-radius:50%;background:var(--text3);position:absolute;top:2px;left:2px;transition:transform 0.2s,background 0.2s;}
+.toggle.on::after{transform:translateX(15px);background:#000;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;width:520px;max-width:95vw;overflow:hidden;max-height:90vh;display:flex;flex-direction:column;}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.modal-title{font-family:var(--mono);font-size:13px;color:var(--text);}
+.modal-close{cursor:pointer;color:var(--text3);font-size:20px;transition:color 0.12s;}
+.modal-close:hover{color:var(--text);}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-size:11px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;}
+.form-input,.form-select{padding:9px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color 0.12s;}
+.form-input:focus,.form-select:focus{border-color:rgba(31,138,128,0.4);}
+.form-select{cursor:pointer;}.form-select option{background:var(--bg3);}
+.tag-checkboxes{display:flex;gap:8px;flex-wrap:wrap;}
+.tag-check{display:flex;align-items:center;gap:5px;padding:4px 10px;border:1px solid var(--border);border-radius:5px;cursor:pointer;font-size:11px;font-family:var(--mono);color:var(--text3);transition:all 0.12s;user-select:none;}
+.tag-check.selected{border-color:var(--accent);color:var(--accent);background:rgba(31,138,128,0.08);}
+.modal-footer{display:flex;justify-content:flex-end;gap:10px;padding:14px 20px;border-top:1px solid var(--border);flex-shrink:0;}
+.btn-cancel{padding:8px 18px;border-radius:7px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-family:var(--mono);transition:all 0.12s;}
+.btn-cancel:hover{background:var(--bg3);}
+.btn-save{padding:8px 18px;border-radius:7px;background:var(--accent);border:none;color:#000;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--mono);transition:all 0.12s;}
+.btn-save:hover{background:#00f0c4;}
+.settings-grid{display:flex;flex-direction:column;gap:12px;}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;}
+.settings-info{display:flex;flex-direction:column;gap:2px;}
+.settings-name{font-size:13px;color:var(--text);}
+.settings-desc{font-size:10px;color:var(--text3);font-family:var(--mono);}
+.notif{position:fixed;bottom:24px;right:24px;padding:11px 18px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;font-size:12px;font-family:var(--mono);color:var(--text);z-index:2000;transform:translateY(20px);opacity:0;transition:all 0.25s;pointer-events:none;}
+.notif.show{transform:translateY(0);opacity:1;}
+.notif.success{border-color:rgba(31,138,128,0.4);color:var(--accent);}
+.notif.error{border-color:rgba(194,90,63,0.4);color:var(--accent3);}
+.sys-area{padding:10px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:12px;color:var(--text);outline:none;resize:vertical;min-height:70px;width:100%;transition:border-color 0.12s;line-height:1.6;}
+.sys-area:focus{border-color:rgba(31,138,128,0.4);}
+</style>
+</head>
+<body>
+<div class="notif" id="notif"></div>
+
+<!-- ADD MODEL MODAL -->
+<div class="modal-overlay" id="addModelModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="ti ti-cpu" style="margin-right:8px;color:var(--accent)"></i>Add Model</div><i class="ti ti-x modal-close" onclick="closeModal('addModelModal')"></i></div>
+    <div class="modal-body">
+      <div class="form-group"><div class="form-label">Display Name</div><input class="form-input" id="m_name" placeholder="e.g. Llama-3.1-8B"/></div>
+      <div class="form-group"><div class="form-label">Model File Path (.gguf)</div><input class="form-input" id="m_path" placeholder="F:\LLM Models\model.gguf"/></div>
+      <div class="form-group"><div class="form-label">Context Size</div><select class="form-select" id="m_ctx"><option value="2048">2048 tokens</option><option value="4096" selected>4096 tokens</option><option value="8192">8192 tokens</option><option value="16384">16384 tokens</option><option value="32768">32768 tokens</option><option value="65536">65536 tokens</option><option value="131072">131072 tokens</option></select></div>
+      <div class="form-group"><div class="form-label">GPU Layers (ngl)</div><input class="form-input" id="m_ngl" value="99"/></div>
+      <div class="form-group"><div class="form-label">Tags</div><div class="tag-checkboxes" id="tagChecks"><div class="tag-check selected" data-tag="GPU">GPU</div><div class="tag-check" data-tag="Vision">Vision</div><div class="tag-check" data-tag="Code">Code</div><div class="tag-check" data-tag="Embed">Embed</div><div class="tag-check" data-tag="General">General</div></div></div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('addModelModal')">Cancel</button><button class="btn-save" onclick="saveModel()">Add Model</button></div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="ti ti-settings" style="margin-right:8px;color:var(--accent)"></i>Settings</div><i class="ti ti-x modal-close" onclick="closeModal('settingsModal')"></i></div>
+    <div class="modal-body">
+      <div class="form-group"><div class="form-label">Platform Name</div><input class="form-input" id="s_name" value="APNJ Jarvis"/></div>
+      <div class="form-group"><div class="form-label">Server URL</div><input class="form-input" id="s_url" value="http://127.0.0.1:3000"/></div>
+      <div class="form-group"><div class="form-label">System Prompt</div><textarea class="sys-area" id="s_sys" rows="3">You are a helpful AI assistant running locally. Be concise, accurate and helpful.</textarea></div>
+      <!-- DATA SOURCES SECTION -->
+      <div style="border-top:1px solid var(--border);padding-top:14px;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;"><i class="ti ti-database" style="margin-right:6px;"></i>Data Sources</div>
+        <div class="form-group"><div class="form-label">Document Folder (PDFs, Word, TXT)</div><input class="form-input" id="s_doc_folder" placeholder="F:\...\uploaded_docs" style="font-size:11px;font-family:var(--mono);"/></div>
+        <div class="form-group"><div class="form-label">Excel File Path</div><input class="form-input" id="s_excel_file" placeholder="F:\APNJ Intelligence\ROI Model.xlsx" style="font-size:11px;font-family:var(--mono);"/></div>
+        <div class="form-group"><div class="form-label">Crawl List File</div><input class="form-input" id="s_crawl_list" placeholder="F:\...\crawl_list.txt" style="font-size:11px;font-family:var(--mono);"/></div>
+        <div class="form-group"><div class="form-label">Crawled Pages Folder</div><input class="form-input" id="s_crawled_folder" placeholder="F:\...\crawled_pages" style="font-size:11px;font-family:var(--mono);"/></div>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-row"><div class="settings-info"><div class="settings-name">Stream Responses</div><div class="settings-desc">Show AI output word by word</div></div><div class="toggle on" id="tog_stream" onclick="this.classList.toggle('on')"></div></div>
+        <div class="settings-row"><div class="settings-info"><div class="settings-name">Auto-connect on Start</div><div class="settings-desc">Ping server when app opens</div></div><div class="toggle on" id="tog_auto" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('settingsModal')">Cancel</button><button class="btn-save" onclick="saveSettings()">Save Settings</button></div>
+  </div>
+</div>
+
+<!-- ADD DOC MODAL -->
+<div class="modal-overlay" id="addDocModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="ti ti-file-plus" style="margin-right:8px;color:var(--accent)"></i>Add Document</div><i class="ti ti-x modal-close" onclick="closeModal('addDocModal')"></i></div>
+    <div class="modal-body">
+      <div class="form-group"><div class="form-label">Document Name</div><input class="form-input" id="d_name" placeholder="e.g. ROI Model 2025"/></div>
+      <div class="form-group"><div class="form-label">File Path</div><input class="form-input" id="d_path" placeholder="F:\APNJ Intelligence\ROI Model.xlsx"/></div>
+      <div class="form-group"><div class="form-label">File Type</div><select class="form-select" id="d_type"><option value="xlsx">Excel (.xlsx)</option><option value="pdf">PDF (.pdf)</option><option value="docx">Word (.docx)</option><option value="txt">Text (.txt)</option><option value="csv">CSV (.csv)</option><option value="folder">Folder</option></select></div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('addDocModal')">Cancel</button><button class="btn-save" onclick="saveDoc()">Add Document</button></div>
+  </div>
+</div>
+
+<!-- ADD CONNECTION MODAL -->
+<div class="modal-overlay" id="addConnModal">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title"><i class="ti ti-plug" style="margin-right:8px;color:var(--accent)"></i>Add Connection</div><i class="ti ti-x modal-close" onclick="closeModal('addConnModal')"></i></div>
+    <div class="modal-body">
+      <div class="form-group"><div class="form-label">Connection Name</div><input class="form-input" id="c_name" placeholder="e.g. My Excel Files"/></div>
+      <div class="form-group"><div class="form-label">Type</div><select class="form-select" id="c_type"><option value="excel">Excel / Spreadsheet</option><option value="word">Word / Documents</option><option value="api">REST API</option><option value="mcp">MCP Server</option></select></div>
+      <div class="form-group"><div class="form-label">Endpoint / Path</div><input class="form-input" id="c_endpoint" placeholder="http://127.0.0.1:3000/v1"/></div>
+    </div>
+    <div class="modal-footer"><button class="btn-cancel" onclick="closeModal('addConnModal')">Cancel</button><button class="btn-save" onclick="saveConn()">Add Connection</button></div>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo"><div class="logo-mark" id="logoMark">AP</div><div class="logo-name" id="logoName">APNJ <span>LLM</span> Studio</div></div>
+  <div class="topbar-center"><div class="server-pill disconnected" id="serverPill" onclick="checkConnection()"><div class="status-dot"></div><span id="serverStatus">Disconnected — click to connect</span></div></div>
+  <div class="topbar-right">
+    <button class="tbtn" title="Check connection" onclick="checkConnection()"><i class="ti ti-refresh"></i></button>
+    <button class="tbtn" title="Settings" onclick="openModal('settingsModal')"><i class="ti ti-settings"></i></button>
+    <button class="tbtn" title="Toggle right panel" onclick="toggleRightPanel()" id="rpToggle"><i class="ti ti-layout-sidebar-right"></i></button>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-scroll">
+      <div class="sec-label">Navigation</div>
+      <div class="nav-item active" onclick="switchTab('jarvis',this)" id="nav-jarvis"><i class="ti ti-sitemap"></i> Jarvis <span class="nav-badge g" id="nb-jarvis">0</span></div>
+      <div class="sec-label">Tools</div>
+      <div class="nav-item" onclick="switchTab('chat',this)" id="nav-chat"><i class="ti ti-message-2"></i> Chat <span class="nav-badge g" id="nb-chat">live</span></div>
+      <div class="nav-item" onclick="switchTab('docs',this)"><i class="ti ti-files"></i> Documents <span class="nav-badge" id="nb-docs">0</span></div>
+      <div class="nav-item" onclick="switchTab('api',this)"><i class="ti ti-code"></i> API Access</div>
+      <div class="nav-item" onclick="switchTab('metrics',this)"><i class="ti ti-chart-bar"></i> Metrics</div>
+      <div class="nav-item" onclick="switchTab('rag',this)"><i class="ti ti-brain"></i> RAG Search <span class="nav-badge g" id="nb-rag">0</span></div>
+      <div class="nav-item" onclick="switchTab('excel',this)"><i class="ti ti-table"></i> Excel Search <span class="nav-badge g" id="nb-excel">0</span></div>
+      <div class="nav-item" onclick="switchTab('web',this)"><i class="ti ti-world"></i> Web Search <span class="nav-badge b" id="nb-web">0</span></div>
+      <div class="nav-item" onclick="clearChat()"><i class="ti ti-eraser"></i> Clear Chat</div>
+      <div class="sec-label" style="margin-top:6px;">Models</div>
+      <div class="model-list" id="modelList"></div>
+      <div class="add-model-btn" onclick="openModal('addModelModal')"><i class="ti ti-plus" style="font-size:14px;"></i> Add Model</div>
+    </div>
+  </div>
+
+  <div class="center">
+    <!-- CHAT -->
+    <div class="panel-page" id="page-chat">
+      <div class="chat-messages" id="chatMessages">
+        <div class="welcome-screen" id="welcomeScreen">
+          <div class="welcome-mark" id="welcomeMark">AP</div>
+          <div class="welcome-title" id="welcomeTitle">APNJ Jarvis</div>
+          <div class="welcome-sub">Your private AI platform. All models run locally on your RTX 5050.<br>No internet. No subscriptions. Full control.</div>
+          <div class="quick-grid">
+            <div class="qbtn" onclick="quickSend('Summarise documents in F:\\APNJ Intelligence folder')"><strong><i class="ti ti-folder"></i> Query My Docs</strong>Analyse APNJ Intelligence files</div>
+            <div class="qbtn" onclick="quickSend('What models do I have loaded and what are their strengths?')"><strong><i class="ti ti-cpu"></i> Model Guide</strong>Help me choose the right model</div>
+            <div class="qbtn" onclick="switchTab('excel',null);"><strong><i class="ti ti-table"></i> Excel Search</strong>Ask questions about your spreadsheets</div>
+            <div class="qbtn" onclick="switchTab('web',null);"><strong><i class="ti ti-world"></i> Web Search</strong>Ask questions from crawled pages</div>
+          </div>
+        </div>
+      </div>
+      <div class="input-zone">
+        <div class="input-bar" id="inputBar">
+          <textarea id="msgInput" rows="1" placeholder="Ask anything — your AI, your data, your control..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <div class="input-btns">
+            <button class="ibtn" title="Attach document" onclick="openModal('addDocModal')"><i class="ti ti-paperclip"></i></button>
+            <button class="ibtn" title="Clear chat" onclick="clearChat()"><i class="ti ti-eraser"></i></button>
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()"><i class="ti ti-send"></i></button>
+          </div>
+        </div>
+        <div class="input-footer">
+          <div class="chips">
+            <div class="chip on" id="chip-gpu"><i class="ti ti-cpu"></i> RTX 5050</div>
+            <div class="chip on" id="chip-offline"><i class="ti ti-wifi-off"></i> Offline</div>
+            <div class="chip" id="chip-docs"><i class="ti ti-files"></i> Docs: 0</div>
+          </div>
+          <div class="input-hint" id="modelHint">No model selected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAG SEARCH -->
+    <div class="panel-page" id="page-rag">
+      <div class="docs-panel">
+        <div class="docs-toolbar">
+          <div id="rag-status-bar" style="display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text3);"><div id="rag-status-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;"></div><span id="rag-status-text">Checking RAG server...</span></div>
+          <button class="pnl-btn" onclick="ragCheckStatus()"><i class="ti ti-refresh"></i> Refresh</button>
+          <button class="pnl-btn primary" onclick="ragReindex()"><i class="ti ti-database"></i> Re-index Docs</button>
+        </div>
+        <!-- Path Settings -->
+        <div class="path-bar" id="rag-path-bar">
+          <div class="path-bar-header" onclick="togglePathBar('rag-path-body')">
+            <span><i class="ti ti-folder" style="margin-right:6px;"></i>Document Folder Settings</span>
+            <i class="ti ti-chevron-down" id="rag-path-chevron"></i>
+          </div>
+          <div class="path-bar-body" id="rag-path-body" style="display:none;">
+            <div class="path-input-row">
+              <span class="path-label">Doc Folder</span>
+              <input class="path-input" id="rag-doc-folder" placeholder="F:\...\uploaded_docs"/>
+              <button class="pnl-btn" onclick="saveRagPath()" style="padding:6px 12px;font-size:11px;"><i class="ti ti-device-floppy"></i> Save</button>
+            </div>
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);">Drop PDF, Word, TXT files in this folder then click Re-index Docs</div>
+          </div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;">Ask Your Documents</div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+            <textarea id="rag-question" rows="3" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:var(--sans);font-size:13px;padding:10px 12px;resize:vertical;outline:none;" placeholder="e.g. What is TDS rate for salary?" onkeydown="if(event.key==='Enter'&&event.ctrlKey)ragAsk()"></textarea>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button class="pnl-btn primary" onclick="ragAsk()" id="rag-ask-btn" style="padding:9px 20px;"><i class="ti ti-search"></i> Search & Ask</button>
+              <button class="pnl-btn" onclick="document.getElementById('rag-question').value='';document.getElementById('rag-answer-box').style.display='none';"><i class="ti ti-eraser"></i> Clear</button>
+              <span style="font-size:11px;color:var(--text3);font-family:var(--mono);">Ctrl+Enter to send</span>
+            </div>
+          </div>
+        </div>
+        <div id="rag-answer-box" style="display:none;flex-direction:column;gap:12px;">
+          <div class="answer-box"><div class="answer-header"><i class="ti ti-robot" style="font-size:14px;"></i> AI Answer — from your documents only</div><div id="rag-answer-text" class="answer-text"></div></div>
+          <div class="sources-box"><div class="sources-header"><i class="ti ti-files" style="margin-right:6px;"></i>Sources Used</div><div id="rag-sources" style="padding:12px;display:flex;flex-direction:column;gap:8px;"></div></div>
+        </div>
+        <div class="loading-bar" id="rag-loading"><div class="spinner"></div>Searching documents and asking Gemma...</div>
+      </div>
+    </div>
+
+    <!-- EXCEL SEARCH -->
+    <div class="panel-page" id="page-excel">
+      <div class="docs-panel">
+        <div class="docs-toolbar">
+          <div id="excel-status-bar" style="display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text3);"><div id="excel-status-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;"></div><span id="excel-status-text">Checking Excel index...</span></div>
+          <button class="pnl-btn" onclick="excelCheckStatus()"><i class="ti ti-refresh"></i> Refresh</button>
+          <button class="pnl-btn primary" onclick="excelReindex()"><i class="ti ti-database"></i> Re-index Excel</button>
+        </div>
+        <!-- Path Settings -->
+        <div class="path-bar">
+          <div class="path-bar-header" onclick="togglePathBar('excel-path-body')">
+            <span><i class="ti ti-file-spreadsheet" style="margin-right:6px;"></i>Excel File Settings</span>
+            <i class="ti ti-chevron-down" id="excel-path-chevron"></i>
+          </div>
+          <div class="path-bar-body" id="excel-path-body" style="display:none;">
+            <div class="path-input-row">
+              <span class="path-label">Excel File</span>
+              <input class="path-input" id="excel-file-path" placeholder="F:\APNJ Intelligence\ROI Model.xlsx"/>
+              <button class="pnl-btn" onclick="saveExcelPath()" style="padding:6px 12px;font-size:11px;"><i class="ti ti-device-floppy"></i> Save</button>
+            </div>
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);">Supports .xlsx .xlsm .csv — click Re-index Excel after changing file</div>
+          </div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;">Ask Your Excel Data</div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+            <textarea id="excel-question" rows="3" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:var(--sans);font-size:13px;padding:10px 12px;resize:vertical;outline:none;" placeholder="e.g. What are Finance targeted benefits for most likely scenario?" onkeydown="if(event.key==='Enter'&&event.ctrlKey)excelAsk()"></textarea>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button class="pnl-btn primary" onclick="excelAsk()" id="excel-ask-btn" style="padding:9px 20px;"><i class="ti ti-search"></i> Search & Ask</button>
+              <button class="pnl-btn" onclick="document.getElementById('excel-question').value='';document.getElementById('excel-answer-box').style.display='none';"><i class="ti ti-eraser"></i> Clear</button>
+              <span style="font-size:11px;color:var(--text3);font-family:var(--mono);">Ctrl+Enter to send</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);width:100%;text-transform:uppercase;letter-spacing:1px;">Quick Questions:</div>
+          <button class="pnl-btn" onclick="excelQuick('What are the Finance targeted benefits for most likely scenario?')" style="font-size:11px;">Finance Benefits</button>
+          <button class="pnl-btn" onclick="excelQuick('What are the HR human resources savings conservative and aggressive?')" style="font-size:11px;">HR Savings</button>
+          <button class="pnl-btn" onclick="excelQuick('What are the total IT information technology benefits?')" style="font-size:11px;">IT Benefits</button>
+          <button class="pnl-btn" onclick="excelQuick('What is the projected cash flow results summary?')" style="font-size:11px;">Cash Flow</button>
+          <button class="pnl-btn" onclick="excelQuick('What are the procurement savings most likely scenario?')" style="font-size:11px;">Procurement</button>
+        </div>
+        <div id="excel-answer-box" style="display:none;flex-direction:column;gap:12px;">
+          <div class="answer-box"><div class="answer-header"><i class="ti ti-robot" style="font-size:14px;"></i> AI Answer — from your Excel data only</div><div id="excel-answer-text" class="answer-text"></div></div>
+          <div class="sources-box"><div class="sources-header"><i class="ti ti-table" style="margin-right:6px;"></i>Sheets & Rows Used</div><div id="excel-sources" style="padding:12px;display:flex;flex-direction:column;gap:8px;"></div></div>
+        </div>
+        <div class="loading-bar" id="excel-loading"><div class="spinner"></div>Searching Excel sheets and asking Gemma...</div>
+      </div>
+    </div>
+
+    <!-- WEB SEARCH -->
+    <div class="panel-page" id="page-web">
+      <div class="docs-panel">
+        <div class="docs-toolbar">
+          <div id="web-status-bar" style="display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text3);"><div id="web-status-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;"></div><span id="web-status-text">Checking web index...</span></div>
+          <button class="pnl-btn" onclick="webCheckStatus()"><i class="ti ti-refresh"></i> Refresh</button>
+          <button class="pnl-btn primary" onclick="webReindex()"><i class="ti ti-world-download"></i> Re-crawl & Index</button>
+        </div>
+
+        <!-- URL Scanner for PDFs -->
+        <div class="path-bar">
+          <div class="path-bar-header" onclick="togglePathBar('web-pdf-body')">
+            <span><i class="ti ti-file-search" style="margin-right:6px;color:var(--accent2);"></i>Scan Website for PDFs</span>
+            <i class="ti ti-chevron-down" id="web-pdf-chevron"></i>
+          </div>
+          <div class="path-bar-body" id="web-pdf-body" style="display:none;">
+            <div style="font-size:11px;color:var(--text3);margin-bottom:8px;">Enter a URL to find all PDFs linked on that page. You choose which ones to download and index.</div>
+            <div class="path-input-row">
+              <span class="path-label">URL</span>
+              <input class="path-input" id="pdf-scan-url" placeholder="https://www.incometax.gov.in/iec/foportal/" style="font-family:var(--sans);"/>
+              <button class="pnl-btn blue" onclick="scanForPdfs()" id="pdf-scan-btn" style="padding:6px 12px;font-size:11px;white-space:nowrap;"><i class="ti ti-search"></i> Scan</button>
+            </div>
+            <div class="loading-bar" id="pdf-scan-loading" style="padding:8px 0;"><div class="spinner blue"></div>Scanning page for PDF links...</div>
+            <!-- PDF Results List -->
+            <div id="pdf-results" style="display:none;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;padding-top:8px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;">
+                <span id="pdf-count-label" style="font-family:var(--mono);font-size:11px;color:var(--accent2);"></span>
+                <div style="display:flex;gap:8px;">
+                  <button class="pnl-btn" onclick="selectAllPdfs(true)" style="padding:4px 10px;font-size:10px;">Select All</button>
+                  <button class="pnl-btn" onclick="selectAllPdfs(false)" style="padding:4px 10px;font-size:10px;">Deselect All</button>
+                </div>
+              </div>
+              <div id="pdf-list"></div>
+              <button class="pnl-btn primary" onclick="downloadSelectedPdfs()" id="pdf-download-btn" style="padding:9px 16px;margin-top:4px;"><i class="ti ti-download"></i> Download Selected & Index</button>
+            </div>
+            <div class="loading-bar" id="pdf-download-loading" style="padding:8px 0;"><div class="spinner blue"></div><span id="pdf-download-status">Downloading PDFs...</span></div>
+          </div>
+        </div>
+
+        <!-- Crawl List Settings -->
+        <div class="path-bar">
+          <div class="path-bar-header" onclick="togglePathBar('web-path-body')">
+            <span><i class="ti ti-list" style="margin-right:6px;"></i>Crawl List Settings</span>
+            <i class="ti ti-chevron-down" id="web-path-chevron"></i>
+          </div>
+          <div class="path-bar-body" id="web-path-body" style="display:none;">
+            <div class="path-input-row">
+              <span class="path-label">Crawl List</span>
+              <input class="path-input" id="web-crawl-list" placeholder="F:\...\crawl_list.txt"/>
+              <button class="pnl-btn" onclick="saveWebPath()" style="padding:6px 12px;font-size:11px;"><i class="ti ti-device-floppy"></i> Save</button>
+            </div>
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono);">One URL per line in the text file. Run web_crawler.py + web_indexer.py to update.</div>
+          </div>
+        </div>
+
+        <!-- Ask -->
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:10px;overflow:hidden;">
+          <div style="padding:10px 14px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;">Ask Your Web Pages & PDFs</div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+            <textarea id="web-question" rows="3" style="width:100%;background:var(--bg4);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:var(--sans);font-size:13px;padding:10px 12px;resize:vertical;outline:none;" placeholder="e.g. What is income tax in India? What does SEBI regulate?" onkeydown="if(event.key==='Enter'&&event.ctrlKey)webAsk()"></textarea>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button class="pnl-btn primary" onclick="webAsk()" id="web-ask-btn" style="padding:9px 20px;"><i class="ti ti-search"></i> Search & Ask</button>
+              <button class="pnl-btn" onclick="document.getElementById('web-question').value='';document.getElementById('web-answer-box').style.display='none';"><i class="ti ti-eraser"></i> Clear</button>
+              <span style="font-size:11px;color:var(--text3);font-family:var(--mono);">Ctrl+Enter to send</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);width:100%;text-transform:uppercase;letter-spacing:1px;">Quick Questions:</div>
+          <button class="pnl-btn" onclick="webQuick('What is income tax in India and how does it work?')" style="font-size:11px;">Income Tax</button>
+          <button class="pnl-btn" onclick="webQuick('What does SEBI regulate and what are its main functions?')" style="font-size:11px;">SEBI Functions</button>
+          <button class="pnl-btn" onclick="webQuick('What are the latest stock market news and updates?')" style="font-size:11px;">Stock News</button>
+          <button class="pnl-btn" onclick="webQuick('What is the history and structure of SEBI?')" style="font-size:11px;">SEBI History</button>
+        </div>
+        <div id="web-answer-box" style="display:none;flex-direction:column;gap:12px;">
+          <div style="background:var(--bg3);border:1px solid rgba(61,120,158,0.25);border-radius:10px;overflow:hidden;">
+            <div style="padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(61,120,158,0.06);display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;"><i class="ti ti-robot" style="font-size:14px;"></i> AI Answer — from your saved web pages & PDFs only</div>
+            <div id="web-answer-text" class="answer-text"></div>
+          </div>
+          <div class="sources-box"><div class="sources-header"><i class="ti ti-world" style="margin-right:6px;"></i>Web Sources Used</div><div id="web-sources" style="padding:12px;display:flex;flex-direction:column;gap:8px;"></div></div>
+        </div>
+        <div class="loading-bar" id="web-loading"><div class="spinner blue"></div>Searching web pages and asking Gemma...</div>
+      </div>
+    </div>
+
+    <!-- JARVIS -->
+    <div class="panel-page active" id="page-jarvis">
+      <div class="docs-toolbar" style="flex-shrink:0;padding:16px 20px 12px;">
+        <div id="jarvis-status-bar" style="display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:14px;background:var(--bg3);border:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text3);"><div id="jarvis-status-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;"></div><span id="jarvis-status-text">Checking Jarvis server...</span></div>
+        <button class="pnl-btn" onclick="jarvisCheckStatus()"><i class="ti ti-refresh"></i> Refresh</button>
+        <button class="pnl-btn" onclick="jarvisToggleFolders()"><i class="ti ti-folders"></i> Folders</button>
+        <button class="pnl-btn" onclick="jarvisClearChat()" style="margin-left:auto;"><i class="ti ti-eraser"></i> Clear</button>
+      </div>
+      <div id="jarvis-folders-panel" style="display:none;flex-shrink:0;padding:0 20px 14px;">
+        <div style="background:var(--bg3);border:1px solid var(--border2);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px;">
+          <div id="jarvis-folders-list"></div>
+          <div style="font-size:11px;color:var(--text3);line-height:1.5;">Changes take effect the next time processors run or the watcher restarts — nothing is rescanned automatically when you save.</div>
+          <div style="display:flex;gap:10px;">
+            <button class="pnl-btn primary" onclick="jarvisSaveFolders()"><i class="ti ti-device-floppy"></i> Save</button>
+            <button class="pnl-btn" onclick="jarvisToggleFolders()"><i class="ti ti-x"></i> Close</button>
+          </div>
+        </div>
+      </div>
+      <div id="jarvis-progress-container" style="display:none;flex-direction:column;gap:10px;flex-shrink:0;padding:0 20px 14px;"></div>
+      <div class="chat-messages" id="jarvisMessages">
+        <div style="margin:auto;text-align:center;color:var(--text3);font-size:13px;max-width:360px;">
+          <i class="ti ti-sitemap" style="font-size:28px;color:var(--accent);margin-bottom:10px;display:block;"></i>
+          Ask about your Excel formulas and dependencies, or your code's structure and calls.
+        </div>
+      </div>
+      <div style="padding:12px 20px 18px;flex-shrink:0;">
+        <div style="display:flex;gap:8px;align-items:flex-end;background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:8px 8px 8px 18px;">
+          <textarea id="jarvis-question" rows="1" style="flex:1;background:transparent;border:none;color:var(--text);font-family:var(--sans);font-size:14px;padding:8px 0;resize:none;outline:none;max-height:140px;line-height:1.5;" placeholder="Ask Jarvis anything about your Excel or code..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();jarvisAsk();}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+          <button class="pnl-btn primary" onclick="jarvisAsk()" id="jarvis-ask-btn" style="flex-shrink:0;padding:10px 14px;border-radius:14px;"><i class="ti ti-send"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="panel-page" id="page-docs">
+      <div class="docs-panel">
+        <div class="docs-toolbar">
+          <button class="pnl-btn primary" onclick="openModal('addDocModal')"><i class="ti ti-plus"></i> Add Document</button>
+          <button class="pnl-btn" onclick="quickSend('List and summarise all my added documents')"><i class="ti ti-search"></i> Query All Docs</button>
+        </div>
+        <div class="doc-grid" id="docGrid"><div style="color:var(--text3);font-size:13px;padding:20px 0;">No documents added yet.</div></div>
+      </div>
+    </div>
+
+    <!-- API -->
+    <div class="panel-page" id="page-api">
+      <div class="api-panel">
+        <div class="api-block">
+          <div class="api-block-header"><div class="api-block-title"><i class="ti ti-terminal"></i> Chat Completion — Python</div><button class="copy-btn" onclick="copyCode('py-code')"><i class="ti ti-copy"></i> Copy</button></div>
+          <div class="api-code" id="py-code"><span class="cmt"># Connect any Python app to your local AI</span>
+<span class="kw">import</span> requests
+response = requests.post(<span class="str">"http://127.0.0.1:3000/v1/chat/completions"</span>,
+    json={<span class="str">"model"</span>:<span class="str">"local-model"</span>,<span class="str">"messages"</span>:[{<span class="str">"role"</span>:<span class="str">"user"</span>,<span class="str">"content"</span>:<span class="str">"Your question"</span>}],<span class="str">"max_tokens"</span>:<span class="num">1000</span>})
+<span class="kw">print</span>(response.json()[<span class="str">"choices"</span>][<span class="num">0</span>][<span class="str">"message"</span>][<span class="str">"content"</span>])</div>
+        </div>
+        <div class="api-block">
+          <div class="api-block-header"><div class="api-block-title"><i class="ti ti-world"></i> RAG Web Search — Python</div><button class="copy-btn" onclick="copyCode('web-code')"><i class="ti ti-copy"></i> Copy</button></div>
+          <div class="api-code" id="web-code"><span class="cmt"># Search crawled web pages with AI</span>
+<span class="kw">import</span> requests
+r = requests.post(<span class="str">"http://127.0.0.1:3000/rag/web"</span>,
+    json={<span class="str">"question"</span>:<span class="str">"What does SEBI regulate?"</span>},timeout=<span class="num">60</span>)
+<span class="kw">print</span>(r.json()[<span class="str">"answer"</span>])</div>
+        </div>
+        <div class="api-block">
+          <div class="api-block-header"><div class="api-block-title"><i class="ti ti-file-search"></i> Scan Page for PDFs — Python</div><button class="copy-btn" onclick="copyCode('pdf-code')"><i class="ti ti-copy"></i> Copy</button></div>
+          <div class="api-code" id="pdf-code"><span class="cmt"># Find all PDF links on any webpage</span>
+<span class="kw">import</span> requests
+r = requests.post(<span class="str">"http://127.0.0.1:3000/rag/scan-pdfs"</span>,
+    json={<span class="str">"url"</span>:<span class="str">"https://www.sebi.gov.in/"</span>},timeout=<span class="num">30</span>)
+data = r.json()
+<span class="kw">for</span> pdf <span class="kw">in</span> data[<span class="str">"pdfs"</span>]:
+    <span class="kw">print</span>(pdf[<span class="str">"title"</span>], pdf[<span class="str">"url"</span>])</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="panel-page" id="page-metrics">
+      <div class="metrics-panel">
+        <div class="metrics-grid">
+          <div class="metric-card"><div class="metric-label">Total Messages</div><div class="metric-value g" id="m-msgs">0</div><div class="metric-sub">This session</div></div>
+          <div class="metric-card"><div class="metric-label">Avg Speed</div><div class="metric-value b" id="m-speed">--</div><div class="metric-sub">tokens / second</div></div>
+          <div class="metric-card"><div class="metric-label">Documents</div><div class="metric-value y" id="m-docs">0</div><div class="metric-sub">Added to studio</div></div>
+          <div class="metric-card"><div class="metric-label">Models Loaded</div><div class="metric-value" id="m-models">0</div><div class="metric-sub">In sidebar</div></div>
+        </div>
+        <div class="api-block">
+          <div class="api-block-header"><div class="api-block-title"><i class="ti ti-cpu"></i> GPU Performance</div></div>
+          <div style="padding:16px;">
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-lbl">VRAM Used</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--accent)" id="bVram"></div></div><div class="bar-val" id="bVramV">0 MB</div></div>
+              <div class="bar-row"><div class="bar-lbl">GPU Load</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--accent2)" id="bGpu"></div></div><div class="bar-val" id="bGpuV">0%</div></div>
+              <div class="bar-row"><div class="bar-lbl">Temp</div><div class="bar-track"><div class="bar-fill" style="width:51%;background:var(--accent4)" id="bTemp"></div></div><div class="bar-val">51 C</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="api-block">
+          <div class="api-block-header"><div class="api-block-title"><i class="ti ti-info-circle"></i> System Info</div></div>
+          <div style="padding:14px 16px;display:flex;flex-direction:column;gap:6px;">
+            <div class="stat-row"><span class="stat-lbl">GPU</span><span class="stat-val g">NVIDIA RTX 5050 (8GB)</span></div>
+            <div class="stat-row"><span class="stat-lbl">CUDA</span><span class="stat-val g">13.2</span></div>
+            <div class="stat-row"><span class="stat-lbl">CPU</span><span class="stat-val">Intel Core i7-13700HX</span></div>
+            <div class="stat-row"><span class="stat-lbl">RAM</span><span class="stat-val">16 GB</span></div>
+            <div class="stat-row"><span class="stat-lbl">Server</span><span class="stat-val" id="mi-server">--</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end center -->
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel" id="rightPanel">
+    <div class="rp-header">System <i class="ti ti-refresh" style="cursor:pointer;font-size:13px;" onclick="checkConnection()"></i></div>
+    <div class="rp-section">
+      <div class="rp-title">GPU · RTX 5050</div>
+      <div class="g-bar-wrap"><div class="g-bar-top"><span>VRAM</span><span id="rp-vram">0 / 8151 MB</span></div><div class="g-bar"><div class="g-fill" id="rp-vram-bar" style="width:0%"></div></div></div>
+      <div class="g-bar-wrap"><div class="g-bar-top"><span>Load</span><span id="rp-load">0%</span></div><div class="g-bar"><div class="g-fill" id="rp-load-bar" style="width:0%"></div></div></div>
+      <div class="stat-row" style="margin-top:6px;"><span class="stat-lbl">Temp</span><span class="stat-val y">51 C</span></div>
+      <div class="stat-row"><span class="stat-lbl">CUDA</span><span class="stat-val g">13.2</span></div>
+    </div>
+    <div class="rp-section">
+      <div class="rp-title">Active Model</div>
+      <div class="stat-row"><span class="stat-lbl">Model</span><span class="stat-val g" id="rp-mname">None</span></div>
+      <div class="stat-row"><span class="stat-lbl">Speed</span><span class="stat-val" id="rp-speed">--</span></div>
+      <div class="stat-row"><span class="stat-lbl">Context</span><span class="stat-val" id="rp-ctx">--</span></div>
+      <div class="stat-row"><span class="stat-lbl">Status</span><span class="stat-val b" id="rp-status">Idle</span></div>
+    </div>
+    <div class="rp-section">
+      <div class="rp-title">Documents <span style="float:right;cursor:pointer;color:var(--accent);font-size:11px;" onclick="openModal('addDocModal')">+ Add</span></div>
+      <div id="rpDocList"><div style="font-size:11px;color:var(--text3);padding:4px 0;">No documents added.</div></div>
+    </div>
+    <div class="rp-section">
+      <div class="rp-title">App Connections <span style="float:right;cursor:pointer;color:var(--accent);font-size:11px;" onclick="openModal('addConnModal')">+ Add</span></div>
+      <div id="connList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ STATE ═══
+let state={serverUrl:'http://127.0.0.1:3000',platformName:'APNJ Jarvis',systemPrompt:'You are a helpful AI assistant running locally. Be concise, accurate and helpful.',connected:false,activeModel:null,models:[{id:1,name:'gemma-4-E4B',path:'F:\\LLM Models\\gemma-4-E4B-it-GGUF\\gemma-4-E4B-it-Q4_K_M.gguf',ctx:4096,ngl:99,tags:['GPU','Vision']},{id:2,name:'Qwen2.5-Coder-7B',path:'F:\\LLM Models\\Qwen2.5-Coder-7B-Instruct-128K-GGUF\\',ctx:131072,ngl:99,tags:['GPU','Code']},{id:3,name:'Yarn-Mistral-7B',path:'F:\\LLM Models\\Yarn-Mistral-7B-128k-GGUF\\',ctx:131072,ngl:99,tags:['GPU']},{id:4,name:'Nomic-Embed-V2',path:'F:\\LLM Models\\Nomic-Embed-Text-V2-GGUF\\',ctx:2048,ngl:99,tags:['Embed']}],docs:[],connections:[{id:1,name:'Excel / CSV',type:'excel',endpoint:'http://127.0.0.1:3000/v1',on:true},{id:2,name:'Word / Docs',type:'word',endpoint:'http://127.0.0.1:3000/v1',on:true},{id:3,name:'REST API',type:'api',endpoint:'http://127.0.0.1:3000/v1',on:true}],chatHistory:[],msgCount:0,speeds:[],nextId:10,rightPanelVisible:true};
+let notifTimer;
+const connIconMap={excel:'c-excel ti-table',word:'c-word ti-file-word',api:'c-api ti-code',mcp:'c-mcp ti-plug'};
+
+const iconMap={pdf:'icon-pdf',xlsx:'icon-xls',xls:'icon-xls',docx:'icon-doc',doc:'icon-doc',txt:'icon-txt',csv:'icon-csv',folder:'icon-folder'};
+const iconName={pdf:'ti-file-text',xlsx:'ti-file-spreadsheet',xls:'ti-file-spreadsheet',docx:'ti-file-word',doc:'ti-file-word',txt:'ti-file',csv:'ti-file-spreadsheet',folder:'ti-folder'};
+function loadState(){try{const s=JSON.parse(localStorage.getItem('apnj-studio-state')||'{}');Object.assign(state,s);}catch(e){}}
+function saveState(){try{localStorage.setItem('apnj-studio-state',JSON.stringify(state));}catch(e){}}
+loadState();renderAll();
+setTimeout(checkConnection,800);
+setTimeout(ragCheckStatus,1200);
+setTimeout(excelCheckStatus,1400);
+setTimeout(webCheckStatus,1600);
+setTimeout(jarvisCheckStatus,1800);
+setTimeout(jarvisStartProgressPolling,1900);
+setTimeout(loadConfigIntoUI,2000);
+
+function renderAll(){renderModels();renderDocs();renderConns();updatePlatformName();updateMetrics();}
+function updatePlatformName(){document.getElementById('logoName').innerHTML=state.platformName.replace('LLM','<span>LLM</span>');document.getElementById('welcomeTitle').textContent=state.platformName;document.getElementById('welcomeMark').textContent=state.platformName.substring(0,2).toUpperCase();document.getElementById('logoMark').textContent=state.platformName.substring(0,2).toUpperCase();document.title=state.platformName;}
+
+// ═══ TAB SWITCHING ═══
+function switchTab(name,navEl){
+  document.querySelectorAll('.panel-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const tabEl=document.getElementById('t-'+name);
+  if(tabEl)tabEl.classList.add('active');
+  if(navEl)navEl.classList.add('active');
+  const rp=document.getElementById('rightPanel'),btn=document.getElementById('rpToggle');
+  if(['rag','excel','web','jarvis'].includes(name)){rp.style.display='none';btn.classList.remove('active');state.rightPanelVisible=false;}
+  else{rp.style.display='';btn.classList.add('active');state.rightPanelVisible=true;}
+  if(name==='rag')ragCheckStatus();
+  if(name==='excel')excelCheckStatus();
+  if(name==='web')webCheckStatus();
+  if(name==='jarvis')jarvisCheckStatus();
+}
+
+// ═══ PATH BAR TOGGLE ═══
+function togglePathBar(bodyId){
+  const body=document.getElementById(bodyId);
+  const isOpen=body.style.display!=='none';
+  body.style.display=isOpen?'none':'flex';
+  body.style.flexDirection='column';
+}
+
+// ═══ CONFIG ═══
+async function loadConfigIntoUI(){
+  try{
+    const r=await fetch('http://127.0.0.1:3000/config');
+    const cfg=await r.json();
+    // Fill path inputs in tabs
+    if(document.getElementById('rag-doc-folder'))document.getElementById('rag-doc-folder').value=cfg.doc_folder||'';
+    if(document.getElementById('excel-file-path'))document.getElementById('excel-file-path').value=(cfg.excel_files||[])[0]||'';
+    if(document.getElementById('web-crawl-list'))document.getElementById('web-crawl-list').value=cfg.crawl_list||'';
+    // Fill settings modal
+    if(document.getElementById('s_doc_folder'))document.getElementById('s_doc_folder').value=cfg.doc_folder||'';
+    if(document.getElementById('s_excel_file'))document.getElementById('s_excel_file').value=(cfg.excel_files||[])[0]||'';
+    if(document.getElementById('s_crawl_list'))document.getElementById('s_crawl_list').value=cfg.crawl_list||'';
+    if(document.getElementById('s_crawled_folder'))document.getElementById('s_crawled_folder').value=cfg.crawled_folder||'';
+  }catch(e){/* server may not be up yet */}
+}
+
+async function saveConfig(updates){
+  try{
+    const r=await fetch('http://127.0.0.1:3000/config');
+    const cfg=await r.json();
+    Object.assign(cfg,updates);
+    await fetch('http://127.0.0.1:3000/config',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)});
+    notify('Path saved!','success');
+  }catch(e){notify('Could not save — is rag_server running?','error');}
+}
+
+async function saveRagPath(){
+  const val=document.getElementById('rag-doc-folder').value.trim();
+  if(!val)return;
+  await saveConfig({doc_folder:val});
+  document.getElementById('s_doc_folder').value=val;
+}
+
+async function saveExcelPath(){
+  const val=document.getElementById('excel-file-path').value.trim();
+  if(!val)return;
+  await saveConfig({excel_files:[val]});
+  document.getElementById('s_excel_file').value=val;
+}
+
+async function saveWebPath(){
+  const val=document.getElementById('web-crawl-list').value.trim();
+  if(!val)return;
+  await saveConfig({crawl_list:val});
+  document.getElementById('s_crawl_list').value=val;
+}
+
+// ═══ PDF SCANNER ═══
+async function scanForPdfs(){
+  const url=document.getElementById('pdf-scan-url').value.trim();
+  if(!url){notify('Enter a URL to scan','error');return;}
+  document.getElementById('pdf-scan-loading').style.display='flex';
+  document.getElementById('pdf-results').style.display='none';
+  document.getElementById('pdf-scan-btn').disabled=true;
+  try{
+    const r=await fetch('http://127.0.0.1:3000/rag/scan-pdfs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
+    const d=await r.json();
+    if(d.error)throw new Error(d.error);
+    renderPdfList(d.pdfs,d.pdfs_found);
+  }catch(e){notify('Scan failed: '+e.message,'error');}
+  finally{document.getElementById('pdf-scan-loading').style.display='none';document.getElementById('pdf-scan-btn').disabled=false;}
+}
+
+function renderPdfList(pdfs,count){
+  document.getElementById('pdf-count-label').textContent=count+' PDF'+(count!==1?'s':'')+' found';
+  const list=document.getElementById('pdf-list');
+  list.innerHTML='';
+  if(!pdfs||pdfs.length===0){list.innerHTML='<div style="color:var(--text3);font-size:12px;padding:8px 0;">No PDF links found on this page.</div>';document.getElementById('pdf-results').style.display='flex';document.getElementById('pdf-download-btn').style.display='none';return;}
+  pdfs.forEach((pdf,i)=>{
+    const div=document.createElement('div');div.className='pdf-list-item';
+    div.innerHTML='<input type="checkbox" id="pdf-'+i+'" checked/><div class="pdf-list-info"><div class="pdf-list-title">'+escHtml(pdf.title||pdf.filename)+'</div><div class="pdf-list-url">'+escHtml(pdf.url)+'</div></div>';
+    div.querySelector('input').dataset.url=pdf.url;
+    list.appendChild(div);
+  });
+  document.getElementById('pdf-results').style.display='flex';
+  document.getElementById('pdf-results').style.flexDirection='column';
+  document.getElementById('pdf-download-btn').style.display='flex';
+}
+
+function selectAllPdfs(checked){
+  document.querySelectorAll('#pdf-list input[type=checkbox]').forEach(cb=>cb.checked=checked);
+}
+
+async function downloadSelectedPdfs(){
+  const checkboxes=[...document.querySelectorAll('#pdf-list input[type=checkbox]:checked')];
+  if(!checkboxes.length){notify('No PDFs selected','error');return;}
+  const urls=checkboxes.map(cb=>cb.dataset.url);
+  document.getElementById('pdf-download-loading').style.display='flex';
+  document.getElementById('pdf-download-btn').disabled=true;
+  document.getElementById('pdf-download-status').textContent='Downloading '+urls.length+' PDF(s)...';
+  try{
+    const r=await fetch('http://127.0.0.1:3000/rag/download-pdfs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({urls})});
+    const d=await r.json();
+    if(d.error)throw new Error(d.error);
+    notify(d.message,'success');
+    // Trigger reindex automatically
+    setTimeout(webCheckStatus,1000);
+  }catch(e){notify('Download failed: '+e.message,'error');}
+  finally{document.getElementById('pdf-download-loading').style.display='none';document.getElementById('pdf-download-btn').disabled=false;}
+}
+
+// ═══ CONNECTION ═══
+async function checkConnection(){
+  const pill=document.getElementById('serverPill'),status=document.getElementById('serverStatus');
+  status.textContent='Connecting...';
+  try{
+    const res=await fetch(state.serverUrl+'/health',{signal:AbortSignal.timeout(3000)});
+    const data=await res.json();state.connected=true;
+    pill.className='server-pill connected';
+    status.textContent=state.serverUrl.replace('http://','')+'  Ready';
+    document.getElementById('mi-server').textContent=state.serverUrl;
+    notify('Connected to llama-server!','success');
+  }catch(e){state.connected=false;pill.className='server-pill disconnected';status.textContent='Not connected — start llama-server.exe first';}
+}
+
+// ═══ MODELS ═══
+function renderModels(){
+  const list=document.getElementById('modelList');list.innerHTML='';
+  state.models.forEach(m=>{
+    const isActive=state.activeModel&&state.activeModel.id===m.id;
+    const tags=m.tags.map(t=>'<span class="tag tag-'+t.toLowerCase()+'">'+t+'</span>').join('');
+    const div=document.createElement('div');div.className='model-card'+(isActive?' active':'');
+    div.innerHTML='<div class="model-card-header"><div class="model-card-name">'+m.name+'</div><i class="ti ti-x model-card-del" onclick="deleteModel('+m.id+',event)"></i></div><div class="tag-row">'+tags+'</div><div class="model-card-meta">'+(m.ctx>=1000?Math.round(m.ctx/1000)+'K':m.ctx)+' ctx ngl '+m.ngl+'</div>';
+    div.addEventListener('click',()=>selectModel(m));list.appendChild(div);
+  });
+  document.getElementById('m-models').textContent=state.models.length;
+}
+function selectModel(m){state.activeModel=m;document.getElementById('rp-mname').textContent=m.name;document.getElementById('rp-ctx').textContent=(m.ctx>=1000?Math.round(m.ctx/1000)+'K':m.ctx)+' tokens';document.getElementById('modelHint').textContent=m.name+' '+(m.ctx>=1000?Math.round(m.ctx/1000)+'K':m.ctx);renderModels();saveState();notify('Model: '+m.name,'success');}
+function deleteModel(id,e){e.stopPropagation();state.models=state.models.filter(m=>m.id!==id);if(state.activeModel&&state.activeModel.id===id)state.activeModel=null;renderModels();saveState();notify('Model removed','');}
+function saveModel(){
+  const name=document.getElementById('m_name').value.trim(),path=document.getElementById('m_path').value.trim();
+  if(!name||!path){notify('Fill in name and path','error');return;}
+  const tags=[...document.querySelectorAll('#tagChecks .tag-check.selected')].map(el=>el.dataset.tag);
+  state.models.push({id:++state.nextId,name,path,ctx:parseInt(document.getElementById('m_ctx').value),ngl:parseInt(document.getElementById('m_ngl').value)||99,tags:tags.length?tags:['General']});
+  renderModels();saveState();closeModal('addModelModal');notify('Model added: '+name,'success');
+  document.getElementById('m_name').value='';document.getElementById('m_path').value='';
+}
+
+// ═══ DOCS ═══
+function renderDocs(){
+  const grid=document.getElementById('docGrid'),rpList=document.getElementById('rpDocList');
+  document.getElementById('nb-docs').textContent=state.docs.length;document.getElementById('m-docs').textContent=state.docs.length;document.getElementById('chip-docs').textContent='Docs: '+state.docs.length;
+  if(!state.docs.length){grid.innerHTML='<div style="color:var(--text3);font-size:13px;padding:20px 0;">No documents added yet.</div>';rpList.innerHTML='<div style="font-size:11px;color:var(--text3);padding:4px 0;">No documents added.</div>';return;}
+  grid.innerHTML='';rpList.innerHTML='';
+  state.docs.forEach(d=>{
+    const ic=iconMap[d.type]||'icon-txt',in_=iconName[d.type]||'ti-file';
+    const card=document.createElement('div');card.className='doc-card';
+    card.innerHTML='<i class="ti ti-x doc-card-del" onclick="deleteDoc('+d.id+',event)"></i><div class="doc-card-icon '+ic+'"><i class="ti '+in_+'"></i></div><div class="doc-card-name">'+d.name+'</div><div class="doc-card-meta">'+d.type.toUpperCase()+'</div>';
+    card.addEventListener('click',()=>quickSend('Summarise: '+d.path));grid.appendChild(card);
+    const rpItem=document.createElement('div');rpItem.className='rp-doc';
+    rpItem.innerHTML='<div class="rp-doc-icon '+ic+'"><i class="ti '+in_+'" style="font-size:13px;"></i></div><div class="rp-doc-info"><div class="rp-doc-name">'+d.name+'</div><div class="rp-doc-meta">'+d.type.toUpperCase()+'</div></div>';
+    rpItem.addEventListener('click',()=>quickSend('Summarise: '+d.path));rpList.appendChild(rpItem);
+  });
+}
+function saveDoc(){
+  const name=document.getElementById('d_name').value.trim(),path=document.getElementById('d_path').value.trim();
+  if(!name||!path){notify('Fill in name and path','error');return;}
+  state.docs.push({id:++state.nextId,name,path,type:document.getElementById('d_type').value});
+  renderDocs();saveState();closeModal('addDocModal');notify('Document added: '+name,'success');
+  document.getElementById('d_name').value='';document.getElementById('d_path').value='';
+}
+function deleteDoc(id,e){e.stopPropagation();state.docs=state.docs.filter(d=>d.id!==id);renderDocs();saveState();notify('Document removed','');}
+
+// ═══ CONNECTIONS ═══
+function renderConns(){
+  const list=document.getElementById('connList');list.innerHTML='';
+  state.connections.forEach(c=>{
+    const cls=connIconMap[c.type]||'c-api ti-plug',[iconCls,iconN]=cls.split(' ');
+    const row=document.createElement('div');row.className='conn-row';
+    row.innerHTML='<div class="conn-icon '+iconCls+'"><i class="ti '+iconN+'"></i></div><div class="conn-info"><div class="conn-name">'+c.name+'</div><div class="conn-meta">'+c.endpoint+'</div></div><div class="toggle '+(c.on?'on':'')+'" onclick="toggleConn('+c.id+',this)"></div>';
+    list.appendChild(row);
+  });
+}
+function toggleConn(id,el){el.classList.toggle('on');const c=state.connections.find(c=>c.id===id);if(c)c.on=el.classList.contains('on');saveState();}
+function saveConn(){
+  const name=document.getElementById('c_name').value.trim(),endpoint=document.getElementById('c_endpoint').value.trim();
+  if(!name){notify('Enter a name','error');return;}
+  state.connections.push({id:++state.nextId,name,type:document.getElementById('c_type').value,endpoint,on:true});
+  renderConns();saveState();closeModal('addConnModal');notify('Connection added: '+name,'success');
+  document.getElementById('c_name').value='';document.getElementById('c_endpoint').value='';
+}
+
+// ═══ CHAT ═══
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px';}
+function quickSend(text){document.getElementById('msgInput').value=text;switchTab('chat',document.getElementById('nav-chat'));sendMessage();}
+function clearChat(){const area=document.getElementById('chatMessages');state.chatHistory=[];area.innerHTML='<div class="welcome-screen" id="welcomeScreen"><div class="welcome-mark" id="welcomeMark">'+state.platformName.substring(0,2).toUpperCase()+'</div><div class="welcome-title" id="welcomeTitle">'+state.platformName+'</div><div class="welcome-sub">Your private AI platform.</div></div>';saveState();}
+
+async function sendMessage() {
+  const input = document.getElementById('msgInput');
+  const text  = input.value.trim();
+  if (!text) return;
+  const ws = document.getElementById('welcomeScreen');
+  if (ws) ws.remove();
+  addMessage('user', text, null);
+  state.chatHistory.push({ role: 'user', content: text });
+  input.value = '';
+  input.style.height = 'auto';
+  state.msgCount++;
+  updateMetrics();
+  const sendBtn = document.getElementById('sendBtn');
+  sendBtn.disabled = true;
+  document.getElementById('rp-status').textContent = 'Thinking...';
+  const typingId = 'typing-' + Date.now();
+  addTyping(typingId);
+  animateGPUBusy();
+  try {
+    // STEP 1: Search all knowledge bases simultaneously
+    try {
+      const ragRes = await fetch('http://127.0.0.1:3000/rag/unified', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: text }),
+        signal: AbortSignal.timeout(25000)
+      });
+      const ragData = await ragRes.json();
+      if (ragData.has_context && ragData.answer) {
+        // RAG found relevant results — use directly
+        removeTyping(typingId);
+        addMessage('ai', ragData.answer, ragData.sources);
+        state.chatHistory.push({ role: 'assistant', content: ragData.answer });
+        animateGPUIdle();
+        sendBtn.disabled = false;
+        document.getElementById('rp-status').textContent = 'Idle';
+        updateMetrics();
+        saveState();
+        return;
+      }
+    } catch (ragErr) {
+      // RAG server offline — fall through to pure Gemma chat
+      console.log('RAG unavailable:', ragErr.message);
+    }
+    // STEP 2: Pure Gemma chat (no RAG context found)
+    const messages = [];
+    // Build system message with doc context if docs are added
+    let sysMsg = state.systemPrompt || '';
+    if (state.docs && state.docs.length > 0) {
+      const docList = state.docs.map(d => '- ' + d.name + ': ' + d.path).join('\n');
+      sysMsg += '\n\nThe user has these documents available:\n' + docList;
+    }
+    if (sysMsg) messages.push({ role: 'system', content: sysMsg });
+    messages.push(...state.chatHistory);
+    const t0  = Date.now();
+    const res = await fetch(state.serverUrl + '/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'local-model', messages, temperature: 0.7, max_tokens: 2048, stream: false }),
+      signal: AbortSignal.timeout(120000)
+    });
+    removeTyping(typingId);
+    if (!res.ok) throw new Error('Server error: ' + res.status);
+    const data    = await res.json();
+    const reply   = data.choices[0].message.content;
+    const elapsed = (Date.now() - t0) / 1000;
+    const tokens  = data.usage ? data.usage.completion_tokens : Math.floor(reply.length / 4);
+    const speed   = Math.round(tokens / elapsed);
+    state.speeds.push(speed);
+    document.getElementById('rp-speed').textContent = speed + ' t/s';
+    state.chatHistory.push({ role: 'assistant', content: reply });
+    addMessage('ai', reply, null);
+    animateGPUIdle();
+  } catch (e) {
+    removeTyping(typingId);
+    addMessage('ai', 'Error: ' + e.message, null);
+    animateGPUIdle();
+  }
+  sendBtn.disabled = false;
+  document.getElementById('rp-status').textContent = 'Idle';
+  updateMetrics();
+  saveState();
+}
+
+function addMessage(role, text, sources) {
+  const area = document.getElementById('chatMessages');
+  const div  = document.createElement('div');
+  div.className = 'msg ' + role;
+  const label    = role === 'ai' ? (state.activeModel ? state.activeModel.name : 'Jarvis') : 'You';
+  let f = text
+    .replace(/```(\w*)\n([\s\S]*?)```/g, (_, l, c) => '<pre>' + escHtml(c.trim()) + '</pre>')
+    .replace(/`([^`]+)`/g,              (_, c)    => '<code>' + escHtml(c) + '</code>')
+    .replace(/\*\*(.*?)\*\*/g,          '<strong>$1</strong>')
+    .replace(/### (.*?)(\n|$)/g,        '<strong style="font-size:13px;color:var(--accent)">$1</strong><br>')
+    .replace(/\n/g,                     '<br>');
+  // Build expandable sources section
+  let sourcesHtml = '';
+  if (role === 'ai' && sources && sources.length > 0) {
+    const sourceId   = 'src-' + Date.now() + Math.random().toString(36).slice(2,6);
+    const typeIcons  = { document: '📄', excel: '📊', web: '🌐' };
+    const types      = [...new Set(sources.map(s => s.type))];
+    const badge      = types.map(t => typeIcons[t] || '📎').join('');
+    const rows = sources.map(s => {
+      const color = s.relevance >= 60 ? 'var(--accent)' : s.relevance >= 40 ? 'var(--accent4)' : 'var(--accent3)';
+      const icon  = s.type === 'excel' ? 'ti-table' : s.type === 'web' ? 'ti-world' : 'ti-file-text';
+      const where = (s.where || s.section || '').substring(0, 55);
+      return '<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--bg4);border-radius:5px;font-family:var(--mono);font-size:10px;margin-bottom:4px;">'
+        + '<i class="ti ' + icon + '" style="color:var(--text3);font-size:12px;flex-shrink:0;"></i>'
+        + '<div style="flex:1;min-width:0;">'
+        + '<div style="color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(s.file.replace(/_/g,' ').replace('.txt','')) + '</div>'
+        + '<div style="color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + escHtml(where) + '</div>'
+        + '</div><div style="color:' + color + ';font-weight:700;flex-shrink:0;">' + s.relevance + '%</div></div>';
+    }).join('');
+    sourcesHtml = '<div style="margin-top:8px;">'
+      + '<button onclick="toggleSources(\'' + sourceId + '\')" style="display:inline-flex;align-items:center;gap:5px;background:transparent;border:1px solid var(--border);border-radius:5px;padding:3px 10px;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--text3);">'
+      + '<i class="ti ti-database" style="font-size:12px;"></i> ' + badge + ' Sources (' + sources.length + ')'
+      + '<i class="ti ti-chevron-down" id="chev-' + sourceId + '" style="font-size:11px;transition:transform 0.2s;"></i>'
+      + '</button>'
+      + '<div id="' + sourceId + '" style="display:none;flex-direction:column;margin-top:6px;padding:8px;background:var(--bg3);border:1px solid var(--border);border-radius:7px;">'
+      + rows + '</div></div>';
+  }
+  div.innerHTML = '<div class="msg-body"><div class="msg-role">' + label + '</div>'
+    + '<div class="msg-bubble" style="user-select:text;cursor:text;">' + f + sourcesHtml + '</div></div>';
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
+function toggleSources(id) {
+  const panel = document.getElementById(id);
+  const chev  = document.getElementById('chev-' + id);
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'flex';
+  panel.style.flexDirection = 'column';
+  if (chev) chev.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function addTyping(id){
+  const area=document.getElementById('chatMessages'),div=document.createElement('div');div.className='msg ai';div.id=id;
+  div.innerHTML='<div class="msg-body"><div class="msg-role">'+(state.activeModel?state.activeModel.name:'Jarvis')+'</div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>';
+  area.appendChild(div);area.scrollTop=area.scrollHeight;
+}
+function removeTyping(id){const el=document.getElementById(id);if(el)el.remove();}
+function animateGPUBusy(){setGPU(Math.floor(Math.random()*25+65),Math.floor(Math.random()*15+55));}
+function animateGPUIdle(){setTimeout(()=>setGPU(4,0),1500);}
+function setGPU(load,vramPct){
+  document.getElementById('rp-load-bar').style.width=load+'%';document.getElementById('rp-load').textContent=load+'%';
+  const vramMb=Math.round(vramPct*81.51);
+  document.getElementById('rp-vram-bar').style.width=vramPct+'%';document.getElementById('rp-vram').textContent=vramMb+' / 8151 MB';
+  document.getElementById('bGpu').style.width=load+'%';document.getElementById('bGpuV').textContent=load+'%';
+  document.getElementById('bVram').style.width=vramPct+'%';document.getElementById('bVramV').textContent=vramMb+' MB';
+}
+function updateMetrics(){document.getElementById('m-msgs').textContent=state.msgCount;document.getElementById('m-docs').textContent=state.docs.length;document.getElementById('m-models').textContent=state.models.length;if(state.speeds.length)document.getElementById('m-speed').textContent=Math.round(state.speeds.reduce((a,b)=>a+b,0)/state.speeds.length);}
+
+// ═══ SETTINGS ═══
+function saveSettings(){
+  state.platformName=document.getElementById('s_name').value.trim()||'APNJ Jarvis';
+  state.serverUrl=document.getElementById('s_url').value.trim()||'http://127.0.0.1:3000';
+  state.systemPrompt=document.getElementById('s_sys').value;
+  updatePlatformName();saveState();
+  // Save data source paths to config
+  const docFolder=document.getElementById('s_doc_folder').value.trim();
+  const excelFile=document.getElementById('s_excel_file').value.trim();
+  const crawlList=document.getElementById('s_crawl_list').value.trim();
+  const crawledFolder=document.getElementById('s_crawled_folder').value.trim();
+  if(docFolder||excelFile||crawlList){
+    saveConfig({
+      ...(docFolder&&{doc_folder:docFolder}),
+      ...(excelFile&&{excel_files:[excelFile]}),
+      ...(crawlList&&{crawl_list:crawlList}),
+      ...(crawledFolder&&{crawled_folder:crawledFolder})
+    }).then(()=>{
+      if(document.getElementById('rag-doc-folder'))document.getElementById('rag-doc-folder').value=docFolder;
+      if(document.getElementById('excel-file-path'))document.getElementById('excel-file-path').value=excelFile;
+      if(document.getElementById('web-crawl-list'))document.getElementById('web-crawl-list').value=crawlList;
+    });
+  }
+  closeModal('settingsModal');notify('Settings saved','success');checkConnection();
+}
+
+// ═══ MODAL ═══
+function openModal(id){
+  if(id==='settingsModal'){document.getElementById('s_name').value=state.platformName;document.getElementById('s_url').value=state.serverUrl;document.getElementById('s_sys').value=state.systemPrompt;loadConfigIntoUI();}
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});});
+document.querySelectorAll('.tag-check').forEach(el=>{el.addEventListener('click',()=>el.classList.toggle('selected'));});
+function copyCode(id){navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>notify('Copied!','success'));}
+function toggleRightPanel(){const rp=document.getElementById('rightPanel'),btn=document.getElementById('rpToggle');state.rightPanelVisible=!state.rightPanelVisible;rp.style.display=state.rightPanelVisible?'':'none';btn.classList.toggle('active',state.rightPanelVisible);}
+function notify(msg,type){const el=document.getElementById('notif');el.textContent=msg;el.className='notif show'+(type?' '+type:'');clearTimeout(notifTimer);notifTimer=setTimeout(()=>el.classList.remove('show'),3000);}
+setGPU(0,0);
+
+// ═══ RAG FUNCTIONS ═══
+async function ragCheckStatus(){
+  const dot=document.getElementById('rag-status-dot'),text=document.getElementById('rag-status-text'),badge=document.getElementById('nb-rag');
+  try{const r=await fetch('http://127.0.0.1:3000/rag/status');const d=await r.json();
+    if(d.status==='ready'){dot.style.background='var(--accent)';dot.style.animation='blink 2s infinite';text.style.color='var(--accent)';text.textContent='RAG ready - '+d.chunks_in_db+' chunks indexed';if(badge)badge.textContent=d.chunks_in_db;}
+    else throw new Error(d.message);
+  }catch(e){dot.style.background='var(--accent3)';dot.style.animation='none';text.style.color='var(--accent3)';text.textContent='RAG server offline - start rag_server.py';}
+}
+async function ragAsk(){
+  const question=document.getElementById('rag-question').value.trim();if(!question)return;
+  document.getElementById('rag-loading').style.display='flex';document.getElementById('rag-answer-box').style.display='none';document.getElementById('rag-ask-btn').disabled=true;
+  try{
+    const r=await fetch('http://127.0.0.1:3000/rag/query',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+    const d=await r.json();if(d.error)throw new Error(d.error);
+    document.getElementById('rag-answer-text').textContent=d.answer;
+    renderSources('rag-sources',d.sources,'var(--accent2)','ti-file-text',s=>'Section '+s.section);
+    document.getElementById('rag-answer-box').style.display='flex';
+  }catch(e){document.getElementById('rag-answer-text').textContent='Error: '+e.message;document.getElementById('rag-answer-box').style.display='flex';}
+  finally{document.getElementById('rag-loading').style.display='none';document.getElementById('rag-ask-btn').disabled=false;}
+}
+function ragReindex(){notify('Run doc_processor.py in Command Prompt to re-index documents','success');}
+function ragIndexDocs(){notify('Run doc_processor.py in Command Prompt to re-index documents','success');}
+
+// ═══ EXCEL FUNCTIONS ═══
+async function excelCheckStatus(){
+  const dot=document.getElementById('excel-status-dot'),text=document.getElementById('excel-status-text'),badge=document.getElementById('nb-excel');
+  try{const r=await fetch('http://127.0.0.1:3000/rag/excel/status');const d=await r.json();
+    if(d.status==='ready'){dot.style.background='var(--accent)';dot.style.animation='blink 2s infinite';text.style.color='var(--accent)';text.textContent='Excel ready - '+d.chunks_in_db+' rows indexed';if(badge)badge.textContent=d.chunks_in_db;}
+    else throw new Error(d.message);
+  }catch(e){dot.style.background='var(--accent3)';dot.style.animation='none';text.style.color='var(--accent3)';text.textContent='Excel index offline - start rag_server.py';}
+}
+async function excelAsk(){
+  const question=document.getElementById('excel-question').value.trim();if(!question)return;
+  document.getElementById('excel-loading').style.display='flex';document.getElementById('excel-answer-box').style.display='none';document.getElementById('excel-ask-btn').disabled=true;
+  try{
+    const r=await fetch('http://127.0.0.1:3000/rag/excel',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+    const d=await r.json();if(d.error)throw new Error(d.error);
+    document.getElementById('excel-answer-text').textContent=d.answer;
+    renderSources('excel-sources',d.sources,'var(--accent)','ti-table',s=>s.section);
+    document.getElementById('excel-answer-box').style.display='flex';
+  }catch(e){document.getElementById('excel-answer-text').textContent='Error: '+e.message;document.getElementById('excel-answer-box').style.display='flex';}
+  finally{document.getElementById('excel-loading').style.display='none';document.getElementById('excel-ask-btn').disabled=false;}
+}
+function excelQuick(q){document.getElementById('excel-question').value=q;excelAsk();}
+function excelReindex(){notify('Run excel_processor.py in Command Prompt to re-index Excel files','success');}
+
+// ═══ WEB FUNCTIONS ═══
+async function webCheckStatus(){
+  const dot=document.getElementById('web-status-dot'),text=document.getElementById('web-status-text'),badge=document.getElementById('nb-web');
+  try{const r=await fetch('http://127.0.0.1:3000/rag/web/status');const d=await r.json();
+    if(d.status==='ready'){dot.style.background='var(--accent2)';dot.style.animation='blink 2s infinite';text.style.color='var(--accent2)';text.textContent='Web ready - '+d.chunks_in_db+' page chunks indexed';if(badge)badge.textContent=d.chunks_in_db;}
+    else throw new Error(d.message);
+  }catch(e){dot.style.background='var(--accent3)';dot.style.animation='none';text.style.color='var(--accent3)';text.textContent='Web index offline - start rag_server.py';}
+}
+async function webAsk(){
+  const question=document.getElementById('web-question').value.trim();if(!question)return;
+  document.getElementById('web-loading').style.display='flex';document.getElementById('web-answer-box').style.display='none';document.getElementById('web-ask-btn').disabled=true;
+  try{
+    const r=await fetch('http://127.0.0.1:3000/rag/web',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+    const d=await r.json();if(d.error)throw new Error(d.error);
+    document.getElementById('web-answer-text').textContent=d.answer;
+    renderSources('web-sources',d.sources,'var(--accent2)','ti-world',s=>{const u=s.section;return u.length>50?u.substring(0,50)+'...':u;});
+    document.getElementById('web-answer-box').style.display='flex';
+  }catch(e){document.getElementById('web-answer-text').textContent='Error: '+e.message;document.getElementById('web-answer-box').style.display='flex';}
+  finally{document.getElementById('web-loading').style.display='none';document.getElementById('web-ask-btn').disabled=false;}
+}
+function webQuick(q){document.getElementById('web-question').value=q;webAsk();}
+function webReindex(){notify('Run web_crawler.py then web_indexer.py in Command Prompt to update web index','success');}
+function webCrawlDocs(){notify('Run web_crawler.py then web_indexer.py in Command Prompt to update web index','success');}
+
+// ═══ JARVIS FUNCTIONS ═══
+let jarvisWatchedFolders=[];
+async function jarvisToggleFolders(){
+  const panel=document.getElementById('jarvis-folders-panel');
+  const opening=panel.style.display==='none';
+  panel.style.display=opening?'block':'none';
+  if(opening)await jarvisLoadFolders();
+}
+async function jarvisLoadFolders(){
+  try{
+    const r=await fetch('http://127.0.0.1:3000/jarvis/folders');
+    const d=await r.json();
+    if(d.error){notify(d.error,'error');return;}
+    jarvisWatchedFolders=d.watched_folders||[];
+    renderJarvisFolders();
+  }catch(e){notify('Could not load folders: '+e.message,'error');}
+}
+function renderJarvisFolders(){
+  const div=document.getElementById('jarvis-folders-list');
+  const items=jarvisWatchedFolders.map((p,i)=>
+    '<div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg4);border-radius:10px;font-size:12px;">'
+    +'<i class="ti ti-folder" style="color:var(--text3);font-size:14px;flex-shrink:0;"></i>'
+    +'<span style="flex:1;color:var(--text);word-break:break-all;">'+escHtml(p)+'</span>'
+    +'<i class="ti ti-x" style="cursor:pointer;color:var(--text3);flex-shrink:0;" onclick="jarvisRemoveFolder('+i+')"></i>'
+    +'</div>'
+  ).join('');
+  div.innerHTML=
+    '<div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Watched folders — Excel, code, documents and folder structure, all graphed from here</div>'
+    +'<div style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;">'+(items||'<div style="font-size:12px;color:var(--text3);">None watched</div>')+'</div>'
+    +'<div style="display:flex;gap:8px;">'
+    +'<input type="text" id="jarvis-add-folder" placeholder="F:\\path\\to\\folder" style="flex:1;background:var(--bg4);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:12px;padding:7px 10px;outline:none;font-family:var(--sans);" onkeydown="if(event.key===\'Enter\')jarvisAddFolder()">'
+    +'<button class="pnl-btn" onclick="jarvisAddFolder()" style="flex-shrink:0;"><i class="ti ti-plus"></i></button>'
+    +'</div>';
+}
+function jarvisAddFolder(){
+  const input=document.getElementById('jarvis-add-folder');
+  const val=input.value.trim();
+  if(!val)return;
+  jarvisWatchedFolders.push(val);
+  renderJarvisFolders();
+}
+function jarvisRemoveFolder(idx){
+  jarvisWatchedFolders.splice(idx,1);
+  renderJarvisFolders();
+}
+async function jarvisSaveFolders(){
+  try{
+    const r=await fetch('http://127.0.0.1:3000/jarvis/folders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({watched_folders:jarvisWatchedFolders})});
+    const d=await r.json();
+    if(d.error){notify(d.error,'error');return;}
+    notify('Saved — takes effect on next run','success');
+  }catch(e){notify('Could not save: '+e.message,'error');}
+}
+let jarvisProgressInterval=null;
+function jarvisStartProgressPolling(){
+  if(jarvisProgressInterval)return;
+  jarvisProgressInterval=setInterval(jarvisPollProgress,2000);
+  jarvisPollProgress();
+}
+async function jarvisPollProgress(){
+  try{
+    const r=await fetch('http://127.0.0.1:3000/jarvis/progress');
+    const d=await r.json();
+    renderJarvisProgress(d);
+  }catch(e){/* silent — a failed poll shouldn't spam the UI with errors */}
+}
+function renderJarvisProgress(data){
+  const container=document.getElementById('jarvis-progress-container');
+  const labels={excel:'Excel',code:'Code',folder:'Folders',doc:'Documents'};
+  const running=Object.entries(data||{}).filter(([task,info])=>info&&info.status==='running');
+  if(!running.length){container.style.display='none';container.innerHTML='';return;}
+  container.style.display='flex';
+  container.innerHTML=running.map(([task,info])=>{
+    const pct=info.total>0?Math.round((info.current/info.total)*100):0;
+    const label=labels[task]||task;
+    const fileLabel=info.current_file?(' — '+escHtml(info.current_file)):'';
+    return '<div style="display:flex;flex-direction:column;gap:5px;">'
+      +'<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);">'
+      +'<span>Indexing '+label+fileLabel+'</span>'
+      +'<span>'+info.current+'/'+info.total+'</span>'
+      +'</div>'
+      +'<div style="height:5px;background:var(--bg4);border-radius:4px;overflow:hidden;">'
+      +'<div style="height:100%;width:'+pct+'%;background:var(--accent);transition:width 0.4s ease;"></div>'
+      +'</div></div>';
+  }).join('');
+}
+async function jarvisCheckStatus(){
+  const dot=document.getElementById('jarvis-status-dot'),text=document.getElementById('jarvis-status-text'),badge=document.getElementById('nb-jarvis');
+  try{const r=await fetch('http://127.0.0.1:3000/jarvis/status');const d=await r.json();
+    if(d.status==='ready'){dot.style.background='var(--accent)';dot.style.animation='blink 2s infinite';text.style.color='var(--accent)';
+      let msg=d.files+' files, '+d.nodes+' nodes, '+d.edges+' edges';
+      if(d.pending_embeddings>0)msg+=' — '+d.pending_embeddings+' pending embed retry';
+      text.textContent=msg;if(badge)badge.textContent=d.files;}
+    else throw new Error(d.message);
+  }catch(e){dot.style.background='var(--accent3)';dot.style.animation='none';text.style.color='var(--accent3)';text.textContent='Jarvis server offline - start jarvis_server.py';}
+}
+function jarvisAddMessage(role,text,sources){
+  const area=document.getElementById('jarvisMessages');
+  const empty=area.querySelector('div[style*="margin:auto"]');
+  if(empty)empty.remove();
+  const div=document.createElement('div');
+  div.className='msg '+role;
+  const label=role==='ai'?'Jarvis':'You';
+  const sourcesHtml=(role==='ai'&&sources&&sources.length)?buildJarvisSourcesHtml(sources):'';
+  div.innerHTML='<div class="msg-body"><div class="msg-role">'+label+'</div>'
+    +'<div class="msg-bubble" style="user-select:text;cursor:text;">'+escHtml(text).replace(/\n/g,'<br>')+sourcesHtml+'</div></div>';
+  area.appendChild(div);
+  area.scrollTop=area.scrollHeight;
+}
+function jarvisAddTyping(id){
+  const area=document.getElementById('jarvisMessages');
+  const empty=area.querySelector('div[style*="margin:auto"]');
+  if(empty)empty.remove();
+  const div=document.createElement('div');div.className='msg ai';div.id=id;
+  div.innerHTML='<div class="msg-body"><div class="msg-role">Jarvis</div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>';
+  area.appendChild(div);area.scrollTop=area.scrollHeight;
+}
+function jarvisRemoveTyping(id){const el=document.getElementById(id);if(el)el.remove();}
+async function jarvisAsk(){
+  const input=document.getElementById('jarvis-question');
+  const question=input.value.trim();if(!question)return;
+  jarvisAddMessage('user',question,null);
+  input.value='';input.style.height='auto';
+  const typingId='jarvis-typing-'+Date.now();
+  jarvisAddTyping(typingId);
+  document.getElementById('jarvis-ask-btn').disabled=true;
+  try{
+    const r=await fetch('http://127.0.0.1:3000/jarvis/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question})});
+    const d=await r.json();if(d.error)throw new Error(typeof d.error==='string'?d.error:JSON.stringify(d.error));
+    jarvisRemoveTyping(typingId);
+    jarvisAddMessage('ai',d.answer,d.sources);
+  }catch(e){
+    jarvisRemoveTyping(typingId);
+    jarvisAddMessage('ai','Error: '+e.message,null);
+  }finally{document.getElementById('jarvis-ask-btn').disabled=false;}
+}
+function jarvisClearChat(){
+  document.getElementById('jarvisMessages').innerHTML='<div style="margin:auto;text-align:center;color:var(--text3);font-size:13px;max-width:360px;"><i class="ti ti-sitemap" style="font-size:28px;color:var(--accent);margin-bottom:10px;display:block;"></i>Ask about your Excel formulas and dependencies, or your code\'s structure and calls.</div>';
+}
+function buildJarvisSourcesHtml(sources){
+  const rows=sources.map(s=>{
+    const icon=s.display_type==='excel'?'ti-table':s.display_type==='code'?'ti-code':'ti-file';
+    const iconColor=s.display_type==='excel'?'var(--accent)':s.display_type==='code'?'var(--accent2)':'var(--text3)';
+    const hasScore=(s.relevance!==null&&s.relevance!==undefined);
+    const relText=hasScore?s.relevance+'%':'related';
+    const relColor=hasScore?(s.relevance>=60?iconColor:s.relevance>=40?'var(--accent4)':'var(--accent3)'):'var(--text3)';
+    const fid=(s.file_id===null||s.file_id===undefined)?'null':s.file_id;
+    const line=(s.line_start===null||s.line_start===undefined)?'null':s.line_start;
+    return '<div class="source-row" style="cursor:pointer;" onclick="jarvisOpenSource('+fid+','+line+')">'
+      +'<i class="ti '+icon+'" style="color:'+iconColor+';font-size:14px;flex-shrink:0;"></i>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+escHtml(s.file)+'</div>'
+      +'<div style="color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+escHtml(s.location)+' — '+escHtml(s.reason)+'</div>'
+      +'</div>'
+      +'<div style="color:'+relColor+';font-weight:700;flex-shrink:0;font-size:11px;">'+escHtml(relText)+'</div></div>';
+  }).join('');
+  return '<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px;">'+rows+'</div>';
+}
+async function jarvisOpenSource(fileId,lineStart){
+  if(!fileId){notify('No file reference for this source','error');return;}
+  try{
+    const r=await fetch('http://127.0.0.1:3000/jarvis/open',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file_id:fileId,line:lineStart||null})});
+    const d=await r.json();
+    if(d.error)notify(d.error,'error');else notify('Opened','success');
+  }catch(e){notify('Could not reach Jarvis server: '+e.message,'error');}
+}
+
+// ═══ SHARED SOURCE RENDERER ═══
+function renderSources(containerId,sources,iconColor,iconClass,sectionFn){
+  const div=document.getElementById(containerId);div.innerHTML='';
+  sources.forEach(s=>{
+    const color=s.relevance>=60?iconColor:s.relevance>=40?'var(--accent4)':'var(--accent3)';
+    const section=sectionFn(s);
+    const fname=s.file.replace(/_/g,' ').replace('.txt','');
+    div.innerHTML+='<div class="source-row"><i class="ti '+iconClass+'" style="color:'+iconColor+';font-size:14px;flex-shrink:0;"></i><div style="flex:1;min-width:0;"><div style="color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+escHtml(fname)+'</div><div style="color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+escHtml(section)+'</div></div><div style="color:'+color+';font-weight:700;flex-shrink:0;">'+s.relevance+'%</div></div>';
+  });
+}
+</script>
+</body>
+</html>

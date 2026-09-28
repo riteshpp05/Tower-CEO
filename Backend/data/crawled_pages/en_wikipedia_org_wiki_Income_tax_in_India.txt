@@ -1,0 +1,277 @@
+SOURCE URL: https://en.wikipedia.org/wiki/Income_tax_in_India
+TITLE: Income tax in India - Wikipedia
+DESCRIPTION: 
+CRAWLED: 2026-05-24 16:58
+============================================================
+
+From Wikipedia, the free encyclopedia
+Form of illuminati in india
+Income Tax Department logo
+Property tax equalization
+Optimal capital income taxation
+Economic nexus in the United States
+Private tax collection
+Base erosion and profit shifting
+Repatriation tax avoidance
+Unreported employment
+Offshore financial centres
+Offshore magic circle
+Conduit and sink OFCs
+Financial Secrecy Index
+Ireland as a tax haven
+Ireland v. Commission
+Liechtenstein tax affair
+United States as a tax haven
+Panama as a tax haven
+Natural resources consumption
+Vehicle miles traveled
+Financial transaction tax
+Currency transaction tax
+European Union Common Consolidated Corporate Tax Base
+Global minimum corporate tax rate
+Exchange of Information
+Permanent establishment
+Institute on Taxation and Economic Policy
+List of countries by tax rates
+Tax revenue to GDP ratio
+Central Revenue collections in 2007–08
+Personal income tax 7.43 (5.23%)
+Corporate taxes 45.99 (32.3%)
+Other taxes 1.83 (1.29%)
+Customs duties 17.46 (12.3%)
+Other taxes 1.68 (1.18%)
+other taxes 31.96 (22.5%)
+is governed by Entry 82 of the
+Seventh Schedule to the Constitution of India
+to tax non-agricultural income; agricultural income is defined in Section 10(1) of
+the Income-tax Act, 1961
+The income-tax law consists of the 1961 act, Income Tax Rules 1962, Notifications and Circulars issued by the
+Central Board of Direct Taxes
+(CBDT), annual Finance Acts, and judicial pronouncements by the
+Hindu Undivided Families
+(HUF's), companies, firms, LLPs, associations, bodies, local authorities and any other
+. Personal tax depends on residential status. The CBDT administers the
+Income Tax Department
+, which is part of the
+Ministry of Finance's
+Department of Revenue. Income tax is a key source of government funding.
+The Income Tax Department is the central government's largest revenue generator; the total tax revenue increased from
+(US$15 billion) in 1997–98 to
+(US$61 billion) in 2007–08.
+In 2018–19, direct tax collection reported by the CBDT was about
+Taxation has been a function of sovereign states since ancient times. The earliest archaeological evidence of taxation in India is found in
+'s pillar inscription at
+. According to the inscription, tax relief was given to the people of Lumbini (who paid one-eighth of their income, instead of one-sixth).
+says that the king has the sovereign power to levy and collect tax according to
+लोके च करादिग्रहणो शास्त्रनिष्ठः स्यात् । — Manu, Sloka 128, Manusmriti
+("It is in accordance with
+to collect taxes from citizens.")
+note that the king received one-sixth of the income from his subjects, in return for protection.
+(a treatise on economics, the art of governance and foreign policy),
+is not only wealth; a government's power depended on the strength of its treasury: "From the treasury comes the power of the government, and the earth, whose ornament is the treasury, is acquired by means of the treasury and army."
+, eulogizing King Dilipa, says: "it was only for the good of his subjects that he collected taxes from them just as the sun draws moisture from the earth to give it back a thousand time."
+19th and early 20th centuries
+British rule in India
+became established during the 19th century. After the
+, the British government faced an acute financial crisis. To fill the treasury, the first Income-tax Act was introduced in February 1860 by
+(British India's first finance minister).
+The act received the assent of the
+on 24 July 1860, and came into effect immediately. It was divided into 21 parts, with 259 sections. Income was classified in four schedules: i) income from landed property; ii) income from professions and trade; iii) income from securities, annuities and dividends, and iv) income from salaries and pensions. Agricultural income was taxable.
+A number of laws were enacted to streamline the income-tax laws; the Super-Rich Tax and a new Income-tax Act were passed in 1918. The Act of 1922 significantly changed the Act of 1918 by shifting income-tax administration from the
+to the central government. Another notable feature of the act was that the rules would be outlined by
+instead of the act itself.
+A new Income-tax Act was passed in 1939.
+The 1922 act was amended twenty-nine times between 1939 and 1956. A tax on
+was imposed in 1946, and the concept of capital gains has been amended a number of times.
+was appointed to investigate the Indian tax system in light of the
+Second Five-Year Plan's
+revenue requirement. He submitted an extensive report for a coordinated tax system, and several taxation acts were enacted:
+the wealth-tax Act 1957
+Expenditure Tax Act, 1957
+The Direct Taxes Administration Enquiry Committee, under the chairmanship of
+, submitted its report on 30 November 1959 and its recommendations took shape in
+the Income-tax Act, 1961
+. The act, which became effective on 1 April 1962, replaced the Indian Income Tax Act, 1922. Current income-tax law is governed by the 1961 act, which has 298 sections and fourteen schedules.
+The Direct Taxes Code Bill was sponsored in
+on 30 August 2010 by the
+to replace the Income Tax Act, 1961 and the Wealth Tax Act.
+The bill could not pass, however, and lapsed after revocation of the Wealth Tax Act in 2015.
+income declaration scheme, 2016
+, the government of India allowed taxpayers to declare previously-undisclosed income and pay a one-time 45-percent tax. Declarations totaled 64,275, netting
+was announced for individuals & HUF in Budget 2020 and became effective from financial year 2020-21. According to it, individuals can opt for reduced tax rates with no option for claiming exemptions & deductions. Currently, Indian taxpayers can choose between the old tax regime and the new tax regime.
+At the time of introduction, it had 7 different slabs. After three years from introduction, Indian Government reduced both the slab count & tax rates under New Tax Regime in Budget 2023, after reports of poor adoption to new tax regime by tax payers
+For the assessment year 2013–25, individuals earning up to
+(US$2,600) were exempt from income tax.
+About one percent of the population, the
+, falls under the 30-percent slab. It increased by an average of 22 percent from 2000 to 2010, encompassing 580,000 income-tax payers. The
+, who fall under the 10- and 20-percent slabs, grew by an average of seven percent annually to 2.78 million income-tax payers.
+According to section 10(1) of the Act, agricultural income is tax-exempt. Section 2(1A) defines agricultural income as:
+Rent or revenue derived from land in India which is used for agricultural purposes
+Income derived from such land by agricultural operations, including the processing of agricultural produce, raised or received as rent-in-kind, for the market or for sale
+Income attributable to a farm house, subject to conditions
+Income derived from saplings or seedlings grown in a nursery
+Mixed agricultural and business income
+Income in the activities below is initially computed as business income, after permissible deductions. Thereafter, 40, 35 or 25 percent of the income is treated as business income and the rest is treated as agricultural income.
+Growing and manufacturing tea in India
+or brown crepe manufactured from field latex or coalgum obtained from rubber plants grown by a seller in India
+Sale of coffee grown and cured by an Indian seller
+Sale of coffee grown, cured, roasted and ground by an Indian seller
+These are permissible deductions according to the Finance Act, 2015:
+Provident and Voluntary Provident Funds
+Public Provident Fund
+Life-insurance premiums
+Equity-Linked Savings Scheme
+Home-loan principal repayment
+Stamp duty and registration fees for a home
+Sukanya Samriddhi Account
+National Savings Certificate
+Life Insurance Corporation
+annuity premiums up to
+§80CCD – Employee pension contributions, up to 10 percent of salary
+§80CCG – Rajiv Gandhi Equity Savings Scheme, 2013: 50 percent of investment or ₹25,000 (whichever is lower), up to
+§80D – Medical-insurance premium, up to
+25,000 for self/family and up to
+15,000 for parents (up to
+50,000 for senior citizens); premium cannot be paid in cash.
+§80DD – Expenses for medical treatment (including nursing), training and rehabilitation of a permanently-disabled dependent, up to
+1,25,000 for a severe disability, as defined by law)
+§80DDB – Medical expenses, up to
+100,000 for senior citizens)
+§80E – Student-loan interest
+§80EE – Home-loan interest (up to 100,000 on a loan up to
+§80G – Charitable contributions (50 or 100 percent)
+§80GG – Rent minus 10 percent of income, up to
+5,000 per month or 25 percent of income (whatever is less)
+§80TTA – Interest on savings, up to
+interest for senior citizens, up to
+80U – Certified-disability deduction (
+125,000 for a severe disability)
+12,500) for individuals with income up to
+80RRB – Certified royalties on a patent registered on or after 1 April 2003, up to
+§80QQB – Certified book royalties (except textbooks), up to
+The due date for a return is:
+- Companies without international transactions, entities requiring auditing, or partners of an audited firm
+30 November - Companies without international transactions
+31 July – All other filers
+Individuals with an income of less than ₹500,000 (less than ₹10,000 of which is from interest) who have not changed jobs are exempt from income tax.
+Although individual and HUF taxpayers must file their income-tax returns online,
+The practice of paying taxes in advance rather than in a single sum at the end of the fiscal year is known as advance tax. These taxes, often known as the 'pay-as-you-earn' scheme, is paid on tax bills above ₹10,000 in installments instead of as a lump sum. The schedule of advance tax payment for individual and corporate taxpayers are:
+On or before 15 June – 15 percent of advance tax liability
+On or before 15 September – 45 percent of advance tax liability
+On or before 15 December – 75 percent of advance tax liability
+On or before 15 March – 100 percent of advance tax liability
+Amendments due to COVID-19
+There was no change in the timeline for tax payment; however, if the deposit of Advance Tax is delayed, a reduced interest rate of 9 percent per annum, or 0.75 percent per month,
+will be applicable instead of the current rate of 12 percent per annum, or 1 percent, for payment of all taxes falling between 20 March 2020 and 30 June 2020.
+Tax deduction at source
+Income tax is also paid by
+tax deduction at source
+As specified in Part III of I Schedule
+Subject to provisions
+Banks – ₹50,000 (under age 60);
+100,000 (over 60). All other interest – ₹10,000
+Horse-racing winnings
+Payment to resident contractors
+₹30,000 (single contract); ₹100,000 (multiple contracts)
+2% (companies); 1% otherwise
+5% (individual), 10% (domestic companies)
+Life-insurance payment
+Payment to non-resident sportsmen or sports association
+Payment of deposit under National Savings Scheme
+Repurchase of unit by Mutual Fund or Unit Trust of India
+Commission on sale of lottery tickets
+2% (plant, machinery, equipment), 10% (land, building, furniture)
+Purchase of immovable property
+Rent by individual or HUF not liable to tax audit
+Professional or technical services, royalties
+Compensation on acquisition of certain immovable property
+Interest paid by Infrastructure Development Fund under section 10(47) to non-resident or foreign company
+Interest paid by Indian company or business trust on money borrowed in foreign currency under a loan agreement or long-term bonds
+Interest or other amounts paid to non-residents or a foreign company (except under §115O)
+As computed by assessing officer on application under §195(2) or 195(3)
+Number of corporate taxpayers by income
+The tax rate is 25 percent for domestic companies. For new companies incorporated after 1 October 2019 and beginning production before 31 March 2023, the tax rate is 15 percent. Both rates apply only if a company claims no exemptions or concessions.
+For foreign companies, the tax rate is 40 percent (50 percent on royalties and technical services). Surcharges and
+, including a four-percent health-and-education cess, are levied on the flat rate.
+Electronic filing is mandatory.
+Non-corporate taxpayers pay a 10-percent surcharge on income between
+10 million. There is a 15-percent surcharge on income over
+10 million. Domestic companies pay seven percent on taxable income between
+100 million, and 12 percent on income over
+100 million. Foreign companies pay two percent on income between
+100 million, and five percent on income over
+There are five primary types of income-tax returns:
+Normal return (§139(1)): Individuals with an income above ₹250,000 (under age 60), ₹300,000 (age 60 to 79), or ₹500,000 (over 80) must file a return. Due dates vary based on the category of the taxpayer.
+Belated return (§139(4)): A return that was not filed within the original due date may be filed before the end of the relevant assessment year or before the completion of the assessment, whichever is earlier.
+Revised return (§139(5)): If a taxpayer discovers an omission or a wrong statement in a normal or belated return, a revised return may be filed before the end of the assessment year.
+Updated return (§139(8A)): Introduced in the 2022 Union Budget, an ITR-U allows taxpayers to update their returns within 24 months from the end of the relevant assessment year. This is applicable regardless of whether a previous return was filed, provided it is used to disclose additional income and pay additional tax (25% to 50% additional tax on the aggregate of tax and interest). It cannot be used to file a loss return or claim a higher refund.
+Defective return (§139(9)): An assessing officer may flag a return as defective. Such defects must be rectified by the taxpayer within 15 days of notification, or within such further period as the officer may allow.
+In the Finance Act, 2021, the government has introduced the following changes on the Income Tax Act, 1961:
+Amendments for taxation of income arising from Firm/AOP/BOI;
+Increased tax Incentives for International Finance Service Centre;
+Denial of depreciation on Goodwill;
+Full value of consideration for computation of capital gains on slump sale to be at Fair Value;
+Enhancement of Limit for Tax Audit; and
+Definition of the word "Liable to Tax" is introduced.
+Self-assessment is done on a taxpayer's
+. The department assesses tax under section 143(3) (scrutiny), 144 (best judgement), 147 (income escaping assessment) and 153A (search and seizure). Notices for such assessments are issued under sections 143(2), 148 and 153A, respectively. Time limits are prescribed in section 153.
+Penalties can be levied under §271(1)(c)
+for concealing or misrepresenting income. Penalties may range from 100 to 300 percent of the tax evaded. Under-reporting or misreporting income is penalized under §270A. Penalties are 50 percent of the tax on under-reported income and 200 percent of the tax on misreported income. Late fees are payable under §234F.
+Comptroller and Auditor General of India
+Institute of Chartered Accountants of India (2011).
+"Growth of Income Tax revenue in India"
+from the original on 27 February 2012
+"Home – Central Board of Direct Taxes, Government of India"
+. Incometaxindia.gov.in.
+from the original on 2 December 2015
+"Total direct tax collections for FY18-19 fall short by Rs 83,000 crore"
+from the original on 5 June 2020
+Hultzsch, E. (1925). Inscriptions of Asoka. Oxford: Clarendon Press, pp. 164–165
+"Taxation and Indian Economy"
+. New Delhi: Deep and Deep Publications.
+:  CS1 maint: numeric names: authors list (
+) CS1 maint: publisher location (
+"The evolution of income-tax"
+. thehindubusinessline.com.
+from the original on 4 August 2019
+"Evolution of Income Tax System in India"
+from the original on 7 July 2020
+"Impact of DTC on India Inc"
+The Hindu Business Line
+"Black money haul: Rs 65,250 crore collected through Income Declaration Scheme"
+from the original on 4 October 2016
+"Union Budget 2023: New vs Old Tax Regime - See What Has Changed"
+from the original on 1 February 2023
+"Why hasn't the new tax regime taken off?"
+from the original on 1 February 2023
+"All you need to know about Income Tax Returns for AY 2016–17"
+Daily News and Analysis
+from the original on 20 April 2025
+"Evasion of personal tax dips to 59% of mop-up"
+The Financial Express
+from the original on 19 April 2014
+"Tax Laws & Rules > Acts > Income-tax Act, 1961"
+www.incometaxindia.gov.in
+from the original on 10 May 2018
+"E-Filing is mandatory Income is more than 5 lacs"
+from the original on 29 June 2013
+"Tax relief for industries affected by Coronavirus"
+from the original on 27 June 2021
+"Income Tax rates for Companies"
+from the original on 18 May 2015
+"Corporate taxpayers must file electronically, point 4 of I T circular"
+Kumar, Kuldip (27 March 2016),
+"Readers' Corner: Taxation"
+from the original on 6 May 2016
+"Section 271 of India IT Act"
+from the original on 14 October 2013
+https://en.wikipedia.org/w/index.php?title=Income_tax_in_India&oldid=1334582776
+Pages with non-numeric formatnum arguments
+CS1 maint: numeric names: authors list
+CS1 maint: publisher location
+Articles with short description
+Short description is different from Wikidata
+Use Indian English from September 2013
+All Wikipedia articles written in Indian English
+Use dmy dates from October 2020
+Pages using sidebar with the child parameter

@@ -1,0 +1,13 @@
+{
+  "doc_folder": "F:\\Visual Code Directory\\APNJ-LLM-Studio\\data\\uploaded_docs",
+  "excel_folder": "I:\\My Drive\\APNJ Clients",
+  "crawl_list": "F:\\Visual Code Directory\\APNJ-LLM-Studio\\data\\crawled_pages\\crawl_list.txt",
+  "crawled_folder": "F:\\Visual Code Directory\\APNJ-LLM-Studio\\data\\crawled_pages",
+  "chroma_folder": "F:\\Visual Code Directory\\APNJ-LLM-Studio\\data\\chroma_db",
+  "code_folders": [
+    "F:\\Visual Code Directory\\APNJ-LLM-Studio"
+  ],
+  "watched_folders": [
+    "I:\\My Drive\\APNJ Clients"
+  ]
+}

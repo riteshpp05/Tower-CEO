@@ -1,0 +1,471 @@
+SOURCE URL: https://en.wikipedia.org/wiki/Securities_and_Exchange_Board_of_India
+TITLE: Securities and Exchange Board of India - Wikipedia
+DESCRIPTION: 
+CRAWLED: 2026-05-24 16:58
+============================================================
+
+From Wikipedia, the free encyclopedia
+Regulatory body for securities and commodity market in India
+Securities and Exchange Board of India
+Emblem of The Government of India
+Acquired Statutory Status
+Securities and Exchange Board of India Act, 1992
+Securities and Exchange Board of India
+administrative domain
+. It was established on 12 April 1988 as an executive body and was given
+powers on 30 January 1992 through the
+The SEBI was first established in 1988 as a non-statutory body for regulating the
+. Before it came into existence, the Controller of Capital Issues was the market's regulatory authority, and derived power from the Capital Issues (Control) Act, 1947.
+The SEBI became an autonomous body on 30 January 1992 and was accorded
+powers with the passing of the SEBI Act, 1992 by the
+It has its headquarters at the
+and has Northern, Eastern, Southern and Western Regional Offices in
+, respectively. Up until June 2023, it also had 17 local offices spread all over India to promote investor education; however, 16 of them were closed as part of a restructuring exercise.
+The SEBI is managed by its 9-member board of members, which consist of the following people:
+The chairman, who is nominated by the
+Union Government of India
+Union Finance Ministry
+Reserve Bank of India
+The remaining five members are nominated by the Union Government of India, and out of them at least three should be whole-time members.
+After the amendment of 1999, collective investment schemes were brought under the SEBI except
+, chit funds and cooperatives.
+Organisation structure
+on 1 March 2025, replacing
+, whose term ended on 28 February 2025.
+Current board members
+The board currently comprises:
+Kamlesh Chandra Varshney
+The list of SEBI's chairpersons is:
+National Institute of Securities Markets
+Functions and responsibilities
+The Preamble of the Securities and Exchange Board of India describes the basic functions of the Securities and Exchange Board of India as "...to protect the interests of investors in securities and to promote the development of, and to regulate the securities market and for matters connected there with or incidental there to".
+SEBI has to be responsive to the needs of three groups, which constitute the market:
+issuers of securities
+market intermediaries
+SEBI has three powers rolled into one body:
+and quasi-executive. It drafts regulations in its legislative capacity, it conducts investigation and enforcement action in its executive function and it passes rulings and orders in its judicial capacity. Though this makes it very powerful, there is an appeal process to create accountability. There is a Securities Appellate Tribunal which is a three-member tribunal and is currently headed by Justice
+, former Chief Justice of the
+A second appeal lies directly to the
+. SEBI has taken a very proactive role in streamlining disclosure requirements to international standards.
+In October 2025, SEBI issued a consultation paper proposing new incentives for retail investors in corporate bonds such as higher coupon rates or issue-price discounts for certain investor categories and recommended raising the threshold for High-Value Debt Listed Entities to ease compliance for issuers.
+Securities and Exchange Board of India (SEBI)
+For the discharge of its functions efficiently, SEBI has been vested with the following powers:
+to approve by−laws of Securities exchanges.
+to require the Securities exchange to amend their by−laws.
+inspect the books of accounts and call for periodical returns from recognised Securities exchanges.
+inspect the books of accounts of financial intermediaries.
+compel certain companies to list their shares in one or more Securities exchanges.
+registration of Brokers and sub-brokers.
+eliminate malpractices in security market.
+Technical Advisory Committee
+Committee for review of structure of infrastructure institutions
+Advisory Committee for the SEBI Investor Protection and Education Fund
+Takeover Regulations Advisory Committee
+Primary Market Advisory Committee (PMAC)
+Secondary Market Advisory Committee (SMAC)
+Mutual Fund Advisory Committee
+Corporate Bonds & Securitisation Advisory Committee
+SEBI has enjoyed success as a regulator by pushing systematic reforms aggressively and successively. It is credited for quick movement towards making the markets electronic and paperless by introducing the T+5 rolling cycle in July 2001, the T+3 in April 2002, and the
+in April 2003. The rolling cycle of T+2 means that
+is done in 2 days after
+SEBI has also been active in setting up the regulations as required under law. It did away with physical certificates that were prone to postal delays, theft and forgery, apart from making the settlement process slow and cumbersome, by passing the Depositories Act, 1996.
+SEBI has also been instrumental in taking quick and effective steps in light of the global meltdown and the Satyam fiasco.
+In October 2011, it increased the extent and quantity of disclosures to be made by Indian corporate promoters.
+In light of the global meltdown, it liberalized the takeover code to facilitate investments by removing regulatory structures. In one such move, SEBI has increased the application limit for retail investors to
+(US$1,000) at present.
+On the occasion of World Investor Week 2022, SEBI Executive Director Shri G. P. Garg launched a book on Financial Literacy. This book is a joint effort between Metropolitan Stock Exchange of India Limited and CASI New York.
+Criticism and controversies
+Supreme Court of India
+Public Interest Litigation
+India Rejuvenation Initiative
+that had challenged the procedure for key appointments adopted by
+. The petition alleged that, "The constitution of the search-cum-selection committee for recommending the name of chairman and every whole-time members of SEBI for appointment has been altered, which directly impacted its balance and could compromise the role of the SEBI as a watchdog."
+On 21 November 2011, the court allowed petitioners to withdraw the petition and file a fresh petition pointing out constitutional issues regarding appointments of regulators and their independence. The
+Chief Justice of India
+request to dismiss the
+and said that the court was well aware of what was going on in SEBI.
+Hearing a similar petition filed by Bengaluru-based advocate Anil Kumar Agarwal, a two judge Supreme Court bench of Justice
+Surinder Singh Nijjar
+issued a notice to the Govt of India, SEBI chief
+and Omita Paul, Secretary to the President of India.
+Further, it came into light that
+(the then whole time member of SEBI Board) had written to the
+about malaise in SEBI. He said, "The regulatory institution is under duress and under severe attack from powerful corporate interests operating concertedly to undermine SEBI". He specifically said that Finance Minister's office, and especially his advisor Omita Paul, were trying to influence many cases before SEBI, including those relating to Sahara Group, Reliance, Bank of Rajasthan and MCX.
+Regulatory failure, inaction, and incompetence
+Several major financial scams have shaken the Indian market, like the
+Punjab National Bank Scam
+Critics argue that SEBI failed to properly monitor these companies or take timely action when irregularities were noticed.
+There have been instances where market intermediaries engaged in fraudulent activities, which resulted in significant losses for investors.
+SEBI’s monitoring of these intermediaries has been called into question. SEBI has been criticized for its inability to effectively regulate and prevent insider trading, despite having regulations in place. There have been numerous cases where
+went undetected for long periods.
+Some believe SEBI hasn't done enough to prevent companies from issuing IPOs (
+Initial Public Offerings
+) at inflated prices, which hurts regular investors.
+is an ongoing concern in the Indian stock market, particularly with small-cap and mid-cap stocks, which are more susceptible due to lower trading volumes, less liquidity, and limited market analyst coverage.
+schemes are a prevalent form of manipulation, where false or misleading statements are used to inflate a stock’s price before the manipulators sell off their shares at a profit, leading to significant losses for unsuspecting investors.
+The Securities and Exchange Board of India (SEBI) has been criticized for not being able to prevent such manipulations effectively. Reasons include limited resources, reliance on stock exchanges for market data, a lack of a comprehensive legal framework with stringent penalties, slow response times, and a lack of coordination with other regulatory bodies.
+Hindenburg allegations
+activist firm, accused SEBI Chief
+and her husband of having a stake in offshore entities which invested money into India. They alleged that these same funds, managed by
+artificially inflate shares
+of companies owned by the
+This put Buch into the spotlight, since SEBI had previously faced difficulties in finding out the
+that had invested in Adani companies.
+Adani Group calls the claims "malicious, mischievous".
+Leader of the Opposition in the Lok Sabha
+, asked Buch to resign.
+Regional Securities exchanges
+SEBI in its circular dated 30 May 2012 gave exit – guidelines for Securities exchanges. This was mainly due to illiquid nature of trade on many of 20+ regional Securities exchanges. It had asked many of these exchanges to either meet the required criteria or take a graceful exit. SEBI's new norms for Securities exchanges mandates that it should have minimum net-worth of
+1 billion and an annual trading of
+10 billion. The Indian Securities market regulator SEBI had given the recognized Securities exchanges two years to comply or exit the business.
+SEBI is cracking down on virtual stock gaming apps popular among retail investors for creating virtual portfolios and competing on real-time stock prices.
+In May, 2024 Sebi started to allow Foreign Portfolio Investors (FPIs) established in GIFT City to accept unlimited investments from Non-Resident Indians (NRIs) and Persons of Indian Origin (PIOs). After this initiative, NRIs could own 100% of a global fund set up at GIFT city which is a special economic zone in Gujarat.
+Process of de-recognition and exit
+Following is an excerpt from the circular:
+Exchanges may seek exit through voluntary surrender of recognition.
+Securities where the annual trading turnover on its own platform is less than
+10 billion can apply to SEBI for voluntary surrender of recognition and exit, at any time before the expiry of two years from the date of issuance of this Circular.
+If the Securities exchange is not able to achieve the prescribed turnover of
+10 billion on continuous basis or does not apply for voluntary surrender of recognition and exit before the expiry of two years from the date of this Circular, SEBI shall proceed with compulsory de-recognition and exit of such Securities exchanges, in terms of the conditions as may be specified by SEBI.
+Securities Exchanges which are already de-recognised as on date, shall make an application for exit within two months from the date of this circular. Upon failure to do so, the de-recognised exchange shall be subject to compulsory exit process.
+SEBI regulates Indian financial market through its 20 departments.
+Commodity Derivatives Market Regulation Department (CDMRD)
+Corporation Finance Department (CFD)
+Department of Economic and Policy Analysis (DEPA)
+Department of Debt and Hybrid Securities (DDHS)
+Enforcement Department – 1 (EFD1)
+Enforcement Department – 2 (EFD2)
+Enquiries and Adjudication Department (EAD)
+General Services Department (GSD)
+Human Resources Department (HRD)
+Information Technology Department (ITD)
+Integrated Surveillance Department (ISD)
+Investigations Department (IVD)
+Investment Management Department (IMD)
+Legal Affairs Department (LAD)
+Market Intermediaries Regulation and Supervision Department (MIRSD)
+Market Regulation Department (MRD)
+Office of International Affairs (OIA)
+Office of Investor Assistance and Education (OIAE)
+Office of the chairman (OCH)
+Regional offices (ROs)
+2008 financial crisis
+U.S. Securities and Exchange Commission
+Commodity Futures Trading Commission
+Financial Conduct Authority
+Federal Financial Supervisory Authority
+1992 Indian stock market scam
+Financial risk management
+Forward Markets Commission
+Institute of Chartered Accountants of India
+Institute of Company Secretaries of India
+List of financial supervisory authorities by country
+List of stock exchanges in the Commonwealth of Nations
+Securities commission
+. SEBI. Archived from
+"SEBI | Employee Profile in SEBI"
+Securities and Exchange Board of India Act, 1992
+(15). Parliament of India. 1992.
+Annual Report, 2022-23
+"The Security and Exchange Board of India Act 1992"
+The Capital Issues (Control) Act, 1947
+(29). Parliament of India. 1947.
+business-standard.com
+"Expanding Investor Reach through Investors' Service Centres (ISCs) in association with Stock Exchanges and disengaging SEBI Local Offices in a phased manner"
+The objective of this memorandum is to (i) update the Board on the setting up and operationalising of Investors' Service Centres (ISCs) by the two leading Stock Exchanges, viz., NSE and BSE out of their own resources/Investor Service Fund (ISF), in 50 different cities and towns of India with SEBI's active association and participation in such ISCs and (ii) seek approval for phasing out 16 out of 17 Local Offices of SEBI in those cities. Four Regional Offices and one Local Office would continue to operate.
+Zachariah, Reena (6 January 2024).
+"SEBI to close down 16 smaller offices"
+"After private sector experiment, finance secretary Tuhin Kanta Pandey named Sebi chief"
+"Organization Structure"
+"Former Chairmen of SEBI"
+Justice Tarun Agarwala appointed Securities Appellate Tribunal presiding officer – Business Standard
+. (2018-12-12). Retrieved 2019-03-24.
+"Cyril Shroff Managing Partner Mumbai & National Capital Market head Amarchand"
+. barandbench.com/. 14 June 2010.
+"Discussion Paper Implementation of T+2 rolling settlement"
+"Sebi gets rolling on T+2 settlement schedule"
+. 4 January 2003. Archived from
+Sebi's 25-year journey
+. Livemint (2013-05-21). Retrieved 2013-07-29.
+"The Depositories Act, 1996"
+. Ministry of Law and Justice, Government of India
+Media, Indiaforensic (22 July 2014).
+"Satyam Investigation Report by SEBI"
+"SEBI makes it mandatory for companies to disclose promoters' shares"
+. 6 October 2011. Archived from
+"Sebi doubles retail limit, tightens IPO norms"
+"Book Launch on Financial Literacy – PNN Digital"
+"Book Launch on Financial Literacy – Live Mumbai"
+"Is Sebi's Autonomy Under Threat?"
+"PIL alleges nexus in Sebi appointments"
+"SC allows eminent citizens to withdraw petition against SEBI chief's appointment"
+"Notice to Centre on quo warranto against SEBI chief"
+"SC seeks Centre's reply on PIL on Sebi chairman's appointment"
+"KM Abraham's letter to PM"
+. Prime Minister's Office. 20 October 2011
+"Pranab-Chidu feud may be revived over Sebi chief PIL"
+"Upcoming IPO 2024 in India This Week - Track IPO | GMP | Status | Reviews"
+Singh, V.K. (2021). Corporate Governance Failures as a Cause of Increasing Corporate Frauds in India—An Analysis. In: Kaur, H. (eds) Facets of Corporate Governance and Corporate Social Responsibility in India. Accounting, Finance, Sustainability, Governance & Fraud: Theory and Application. Springer, Singapore.
+10.1007/978-981-33-4076-3_2
+"Has SEBI completely failed in regulating the capital market in India?"
+Sabarinathan, G. (2010). SEBI’s Regulation of the Indian Securities Market: A Critical Review of the Major Developments. Vikalpa, 35(4), 13-26.
+10.1177/0256090920100402
+"IPOs thrive despite election season: Companies plan to raise over Rs 10,000 crore in May"
+"IPO count rises in 2023, but amount lags"
+Uppal, Jamshed Y., and Inayat U. Mangla. “Market Volatility, Manipulation, and Regulatory Response: A Comparative Study of Bombay and Karachi Stock Markets.” The Pakistan Development Review, vol. 45, no. 4, 2006, pp. 1071–83.
+. Accessed 30 May 2024.
+Goel, A., Tripathi, V. and Agarwal, M. (2021), "Market microstructure: a comparative study of Bombay stock exchange and national stock exchange", Journal of Advances in Management Research, Vol. 18 No. 3, pp. 414-442.
+10.1108/JAMR-06-2020-0109
+"The Effectiveness of Trade for Trade Segment as a Surveillance Effort to Prevent Price Manipulation: Evidence from India"
+Bose, Suchismita, Securities Market Regulations: Lessons from US and Indian Experience (2005). The ICRA Bulletin, Money & Finance, Vol. 2, No. 20-21, Jan-Jun 2005, Available at
+Agarwalla, Sobhesh Kumar and Jacob, Joshy and Varma, Jayanth Rama, High Frequency Manipulation at Futures Expiry: The Case of Cash Settled Indian Single Stock Futures (February 10, 2014). Indian Institute of Management, Ahmedabad, India Working Paper No. 2014-02-01, Available at
+"Whistleblower Documents Reveal SEBI's Chairperson Had Stake In Obscure Offshore Entities Used In Adani Money Siphoning Scandal"
+from the original on 10 August 2024
+Mukherjee, Andy (12 August 2024).
+"Hindenburg Steps Up for Adani Round Two. With SEBI"
+from the original on 13 August 2024
+"SC rejects plea to review its January verdict upholding SEBI probe into Adani-Hindenburg case"
+. The Hindu. 15 July 2024.
+from the original on 13 August 2024
+Dr Dhananjaya Y Chandrachud, Chief Justice of India (3 January 2024).
+"Judgement in Vishal Tiwari vs Union of India & Ors"
+Supreme Court of India
+from the original on 17 April 2024
+"SEBI chief Madhabi Buch, husband deny Hindenburg charge as 'baseless'; Adani Group says allegations 'malicious, mischievous'
+'If investors lose their…': Rahul Gandhi targets SEBI's Madhabi Puri Buch, PM Modi and Adani over Hindenburg allegations"
+. Livemint. 11 August 2024.
+from the original on 11 August 2024
+"Rahul Gandhi warns of stock market risk after new Hindenburg report on SEBI chief: 'Umpire is compromised'
+from the original on 13 August 2024
+Rukhaiyar, Ashish (20 May 2014).
+"15 regional Securities exchanges to shut operations as Sebi deadline approaches"
+"SEBI is banning apps that offer these virtual trading services"
+. 29 May 2024 – via The Economic Times - The Times of India.
+"Explained: How Sebi just made it easier for NRIs to invest in Indian market"
+www.business-standard.com
+from the original on 2 May 2024
+"SEBI Regulations On Stock Market Exchange"
+Wikimedia Commons has media related to
+Securities and Exchange Board of India
+Securities and Exchange Board of India
+SEBI Latest Circulars
+Financial services in India
+Central Bank of India
+Abu Dhabi Commercial Bank
+Bank Maybank Indonesia
+Bank of Bahrain and Kuwait
+Royal Bank of Scotland
+State Bank of Mauritius
+Andhra Pradesh Grameena Vikas Bank
+Assam Gramin Vikash Bank
+Bangiya Gramin Vikash Bank
+North Malabar Gramin Bank
+Paschim Banga Gramin Bank
+South Malabar Gramin Bank
+Uttar Bihar Gramin Bank
+Uttarakhand Gramin Bank
+Vananchal Gramin Bank
+District Co-operative Central Bank
+Mizoram Co-operative Apex Bank
+Rajkot Nagrik Sahakari Bank
+Shamrao Vithal Co-operative Bank
+Chennai Central Cooperative Bank
+Allahabad UP Gramin Bank
+Gramin Bank of Aryavart
+NSDL Payments Bank Limited
+Surrendered licencees
+Oriental Bank of Commerce
+Imperial Bank of India
+State Bank of Bikaner & Jaipur
+State Bank of Hyderabad
+State Bank of Patiala
+State Bank of Saurashtra
+State Bank of Travancore
+Bharatiya Mahila Bank
+United Industrial Bank
+Centurion Bank of Punjab
+Chartered Bank of India, Australia and China
+National Bank of India
+Mercantile Bank of India, London and China
+Alliance Bank of Simla
+Commercial Bank of India
+Exchange Bank of India & Africa
+(New) Oriental Bank Corporation
+Madhavpura Mercantile Cooperative Bank
+De-Materialisation (De-Mat)
+Foreign Exchange (ForEx)
+Indian Financial System Code (IFSC)
+National Unified USSD Platform (NUUP)
+Structured Financial Messaging System (SFMS)
+A.K. Capital Services Ltd.
+Ambit Corporate Finance Pvt.Ltd.
+Anand Rathi Advisors Ltd.
+Avendus Capital Pvt.Ltd.
+Bcb Brokerage Pvt.Ltd.
+Birla Capital & Financial Services Ltd.
+Bob Capital Markets Ltd.
+Boi Merchant Bankers Ltd.
+Central Bank Of India
+Chartered Finance Management Ltd.
+Choice Capital Advisors Pvt.Ltd.
+Citigroup Global Markets India Pvt.Ltd.
+Credit Suisse Securities (India) Pvt.Ltd.
+Deutsche Equities India Pvt.Ltd.
+DSP Merrill Lynch Ltd.
+Edelweiss Financial Services Ltd.
+Ernst & Young Merchant Banking Services Pvt.Ltd.
+HSBC Securities & Capital Markets (India) Pvt.Ltd.
+ICICI Securities Ltd.
+IDBI Capital Market Services Ltd.
+Il&Fs Capital Advisors Ltd.
+Inga Capital Pvt.Ltd.
+Jefferies India Pvt.Ltd.
+JM Financial Institutional Securities Ltd.
+JP Morgan India Pvt.Ltd.
+Karvy Investor Services Ltd.
+Keynote Corporate Services Ltd.
+KJMC Corporate Advisors (India) Ltd.
+Kotak Mahindra Capital Co.Ltd.
+Lazard India Pvt.Ltd.
+Morgan Stanley India Co.Pvt.Ltd.
+Motilal Oswal Investment Advisors Pvt. Ltd.
+Munoth Financial Services Ltd.
+Pantomath Capital Advisors Pvt.Ltd.
+Religare Capital Markets Ltd.
+Rothschild (India) Pvt.Ltd.
+Saffron Capital Advisors Pvt.Ltd.
+SBI Capital Markets Ltd.
+Trust Investment Advisors Pvt.Ltd.
+UBS Securities India Pvt.Ltd.
+Vivro Financial Services Pvt.Ltd.
+Franklin Templeton Investments
+IIFCL Asset Management
+Brookfield Real Estate Trust
+Mindspace Business Parks REIT
+IIFL Real Estate Investment Trust
+Embassy Office Parks REIT
+Digital Fibre Infrastructure Trust
+Tower Infrastructure Trust
+India Infrastructure Trust
+POWERGRID Infrastructure Investment Trust
+Indian Highway Concessions Trust
+MEP Infrastructure Investment Trust
+National Highways Infra Trust
+Roadstar Infra Investment Trust
+Agriculture Insurance Company of India
+Employees State Insurance (ESI)
+Shriram Life Insurance
+Agricultural insurance in India
+National Health Policy
+Pradhan Mantri  Fasal Bima Yojana
+Pradhan Mantri Suraksha Bima Yojana
+Pradhan Mantri Jeevan Jyoti Bima Yojana
+Ayushman Bharat Yojana
+Rashtriya Swasthya Bima Yojana
+Biju Swastya Kalyan Yojana
+Insurance Institute of India
+Bombay Stock Exchange
+National Stock Exchange
+India International Exchange
+NSE International Exchange
+United Stock Exchange
+Metropolitan Stock Exchange
+India International Bullion Exchange
+Bharat Diamond Bourse
+Indian Energy Exchange
+International Pepper Exchange
+Multi Commodity Exchange
+National Commodity and Derivatives Exchange
+National Spot Exchange
+Universal Commodity Exchange
+StockHolding Corporation of India
+India Ratings & Research (Fitch)
+1992 Indian stock market scam
+Alternative financial services
+National Housing Bank
+Odisha Rural Housing & Development Corporation
+Saradha Group financial scandal
+Rose Valley financial scandal
+Bharat Financial Inclusion
+ESAF Small Finance Bank
+National Bank for Agriculture and Rural Development
+Satin Creditcare Network Limited
+Angel investment, venture capital & private equity
+India Value Fund - True North
+Motilal Oswal Private Equity
+IDFC Private Equity Fund
+JM Financial Private Equity
+Legislation & regulation
+Reserve Bank of India
+Reserve Bank of India Act, 1934
+Government Securities Act, 2006
+The State Bank of India Act, 1955
+The Banking Companies (Acquisition And Transfer Of Undertakings) Act, 1970
+Banking Regulation Act, 1949
+International Financial Services Centres Authority Act, 2019
+Public Debt Act, 1944
+The Unit Trust of India Act, 1963
+Indian Registration Act, 1908
+SEBI (Mutual Funds) Regulations, 1993
+Insurance Association of India
+Life Insurance Council
+General Insurance Council
+Industrial Policy Resolution of 1956
+Life Insurance Corporation Act, 1956
+Insurance Regulatory and Development Authority Act, 1999
+The General Insurance Business (Nationalisation) Act, 1972
+The British Insurance Act, 1870
+Securities commission
+Forward Markets Commission
+Forward Contracts (Regulation) Act, 1952
+The Securities Contracts (Regulation) Act, 1956
+Tamil Nadu Money-Lenders Act, 1957
+The Bombay Money-Lenders Act, 1946
+The Karnataka Money-Lenders Act, 1961
+The Kerala Money-Lenders Act, 1958
+Bengal Money-Lenders Act, 1940
+The Rajasthan Money-Lenders Act, 1963
+Multi-State Cooperative Legislation Act, 2002
+Mutually Aided Cooperative Acts
+The National Housing Bank Act, 1987
+The Chit Funds Act, 1982
+Indian Association of Alternative Investment Funds (IAAIF)
+Indian Trusts Act, 1882
+SEBI (Venture Capital Funds) Regulations, 1996
+SEBI AIF Regulations, 2012
+SEBI (Investment Advisers) Regulations 2013
+Ministry of Commerce and Industry
+Economic Advisory Council
+Central Statistical Office
+Securities and Exchange Board of India
+Enforcement Directorate
+Foreign direct investment
+Foreign exchange reserves
+Reserve Bank of India
+Multi Commodity Exchange
+Government initiatives
+Electronics and semiconductor
+Information technology
+Science and technology
+Gross District Domestic Product of Zonal Councils of India
+Authority control databases
+https://en.wikipedia.org/w/index.php?title=Securities_and_Exchange_Board_of_India&oldid=1354660086
+Securities and Exchange Board of India
+Executive branch of the government of India
+Regulatory agencies of India
+Organisations based in Mumbai
+Financial regulatory authorities of India
+Government agencies established in 1992
+Government agencies of India
+Economic history of India (1947–present)
+Financial services companies based in Mumbai
+1988 establishments in Maharashtra
+Articles with short description
+Short description is different from Wikidata
+Use Indian English from July 2015
+All Wikipedia articles written in Indian English
+Use dmy dates from July 2015
+Pages using infobox mapframe with missing coordinates
+All articles with unsourced statements
+Articles with unsourced statements from November 2025
+Commons category link is on Wikidata

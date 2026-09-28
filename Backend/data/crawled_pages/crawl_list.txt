@@ -1,0 +1,10 @@
+# APNJ Web Crawl List
+# Testing with static sites first
+
+# Financial news - static HTML
+https://economictimes.indiatimes.com/markets/stocks/news
+https://www.moneycontrol.com/news/business/
+
+# Wikipedia - always static, great for reference
+https://en.wikipedia.org/wiki/Income_tax_in_India
+https://en.wikipedia.org/wiki/Securities_and_Exchange_Board_of_India

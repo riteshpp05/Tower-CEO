@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+requests
+pydantic
+chromadb
+psycopg2-binary
+python-docx
+pypdf
+PyMuPDF
+openpyxl
+pandas
+watchdog
+beautifulsoup4
+# lightrag
+# raganything (custom package - ensure it is available if needed)

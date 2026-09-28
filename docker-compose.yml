@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  cfo-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: ndj222/ais-cfo-frontend:latest
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+    networks:
+      - ais-network
+
+  insight-frontend:
+    build:
+      context: ./ais-insight-flow-Vercel-main
+      dockerfile: Dockerfile
+    image: ndj222/ais-insight-frontend:latest
+    ports:
+      - "5174:80"
+    restart: unless-stopped
+    networks:
+      - ais-network
+
+  cfo-backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    image: ndj222/ais-backend:latest
+    env_file:
+      - ./Backend/.env
+    command: ["python", "-m", "cfo_tower.cfo_server"]
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+    networks:
+      - ais-network
+    # Exposing the GPU to the container if Ollama runs locally inside or needs it
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  proxy-backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    image: ndj222/ais-backend:latest
+    env_file:
+      - ./Backend/.env
+    command: ["python", "proxy.py"]
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - ais-network
+
+networks:
+  ais-network:
+    driver: bridge

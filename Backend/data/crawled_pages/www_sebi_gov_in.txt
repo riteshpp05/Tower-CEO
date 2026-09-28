@@ -1,0 +1,9 @@
+SOURCE URL: https://www.sebi.gov.in/
+TITLE: Securities and Exchange Board of India
+DESCRIPTION: 
+CRAWLED: 2026-05-24 16:56
+============================================================
+
+Alternative Investment Fund and Foreign Portfolio Investors Department (AFD)
+AFD handles all work related to Alternative Investment Funds (AIF), Venture Capital Funds (VCF), Foreign Venture Capital Investors (FVCI), Foreign Portfolio Investors (FPI), Designated Depository Participant (DDP) and Custodians.
+Go to Department Section

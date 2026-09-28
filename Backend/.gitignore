@@ -1,0 +1,16 @@
+data/chroma_db/
+data/uploaded_docs/
+__pycache__/
+*.pyc
+
+# Environment files - never commit secrets
+.env
+*.env
+!*.env.example
+
+# Jarvis runtime/generated files
+data/jarvis_progress.json
+data/mineru_output/
+data/rag_anything_workspaces/
+__pycache__/
+*.pyc
