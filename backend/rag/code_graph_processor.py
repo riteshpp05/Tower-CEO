@@ -50,9 +50,9 @@ cfg = load_config()
 
 # List of repo root folders to scan, e.g.:
 #   "code_folders": [
-#       "F:\\Visual Code Directory\\APNJ-LLM-Studio",
-#       "F:\\Visual Code Directory\\ais-cfo-tower",
-#       "F:\\Visual Code Directory\\ais-insight-flow-Vercel"
+#       "./backend",
+#       "./frontend-cfo",
+#       "./frontend-tender"
 #   ]
 # Add this key to studio_config.json — defaults to empty (nothing scanned)
 # rather than guessing, since scope should always be explicit (see the

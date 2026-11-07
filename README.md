@@ -1,11 +1,11 @@
 # Tower-CEO (Executive Control Tower & Enterprise Intelligence Suite)
 
 [![Docker Ready](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white)](Backend/cfo_tower/cfo_server.py)
-[![React 19](https://img.shields.io/badge/Frontend-React%2019-61DAFB?logo=react&logoColor=black)](frontend/)
-[![Shadcn UI](https://img.shields.io/badge/Insight%20Flow-Radix%20%2B%20Shadcn-000000?logo=shadcnui&logoColor=white)](ais-insight-flow-Vercel-main/)
-[![Supabase](https://img.shields.io/badge/Database-Supabase%20Postgres-3ECF8E?logo=supabase&logoColor=white)](Backend/)
-[![Local AI](https://img.shields.io/badge/AI-Private%20RAG%20%2B%20LLM-FF6F00)](Backend/rag/)
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white)](backend/cfo_tower/cfo_server.py)
+[![React 19](https://img.shields.io/badge/Frontend-React%2019-61DAFB?logo=react&logoColor=black)](frontend-cfo/)
+[![Shadcn UI](https://img.shields.io/badge/Insight%20Flow-Radix%20%2B%20Shadcn-000000?logo=shadcnui&logoColor=white)](frontend-tender/)
+[![Supabase](https://img.shields.io/badge/Database-Supabase%20Postgres-3ECF8E?logo=supabase&logoColor=white)](backend/)
+[![Local AI](https://img.shields.io/badge/AI-Private%20RAG%20%2B%20LLM-FF6F00)](backend/rag/)
 
 **Tower-CEO** is an all-in-one Executive Operations, Financial Cockpit, and AI-powered Proposal & Tender Intelligence Platform. It unifies financial forecasting, sales pipeline visibility, automated ERP/CRM data synchronization, tender bid management, and private on-premise Retrieval-Augmented Generation (RAG) into a single, cohesive command center for executive leadership (CEOs, CFOs, CROs, and Tender Directors).
 
@@ -17,7 +17,7 @@
 3. [System Architecture](#system-architecture)
 4. [Component Deep Dive](#component-deep-dive)
    - [1. CFO & Sales Control Tower (Frontend)](#1-cfo--sales-control-tower-frontend)
-   - [2. AIS Insight Flow & Tender Studio (Frontend)](#2-ais-insight-flow--tender-studio-frontend)
+   - [2. Tower-CEO Tender & Proposal Studio (Frontend)](#2-ais-insight-flow--tender-studio-frontend)
    - [3. CFO & Sales Intelligence Server (Backend)](#3-cfo--sales-intelligence-server-backend)
    - [4. AI Gateway & Local CORS Proxy](#4-ai-gateway--local-cors-proxy)
    - [5. Jarvis RAG & Multi-Modal Knowledge Engine](#5-jarvis-rag--multi-modal-knowledge-engine)
@@ -56,7 +56,7 @@ Enterprise leadership and fast-scaling organizations constantly struggle with di
 
 - **Executive Financial Cockpit**: Real-time cash flow monitoring, forecasted Profit & Loss (P&L), automated bank reconciliation, expense categorizations, and exceptions monitoring.
 - **Sales Intelligence & Deal Health**: Pipeline stage distributions, win-rate analytics, stalled-deal detection algorithms, and weekly sales review boards with real-time sync from CRM.
-- **End-to-End Tender & Proposal Engine (`ais-insight-flow`)**: AI-assisted RFP parsing, Go/No-Go tender qualification scoring, automated commercial pricing & margin rules, legal clause library verification, dynamic proposal authoring, and multi-tier approval workflows.
+- **End-to-End Tender & Proposal Engine (`frontend-tender`)**: AI-assisted RFP parsing, Go/No-Go tender qualification scoring, automated commercial pricing & margin rules, legal clause library verification, dynamic proposal authoring, and multi-tier approval workflows.
 - **Automated Zoho Integration Pipeline**: Multi-threaded sync pipelines synchronizing 20+ Zoho Books and Zoho CRM entity types into a unified PostgreSQL schema with zero manual intervention.
 - **Private, Air-Gapped / Local RAG Engine (Jarvis)**: In-house vector embeddings and knowledge graph generation over documents (PDF, DOCX), complex multi-tab Excel models, code repositories, and web assets using local GPU inference (Qwen/Gemma via LLaMA.cpp + Nomic embeddings).
 - **Executive AI Assistants**: Role-specific AI conversational agents for CFOs (finance/cash questions) and Sales Leaders (pipeline/deal questions) grounded in live database queries.
@@ -76,7 +76,7 @@ flowchart TD
 
     subgraph PresentationLayer ["Frontend Layer"]
         CFOUi["CFO & Sales Tower UI\n(React 19 + Vite + Tailwind)\nPort: 5173"]
-        InsightUi["AIS Insight Flow Tender Studio\n(React 18 + Shadcn UI + Radix)\nPort: 5174"]
+        InsightUi["Tower-CEO Tender & Proposal Studio\n(React 18 + Shadcn UI + Radix)\nPort: 5174"]
         StudioUi["APNJ LLM Studio\n(Local Web UI)\nPort: 3000"]
     end
 
@@ -164,7 +164,7 @@ flowchart TD
 ## Component Deep Dive
 
 ### 1. CFO & Sales Control Tower (Frontend)
-Located at [`frontend/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/frontend) (Port `5173`):
+Located at [`frontend-cfo/`](frontend-cfo/) (Port `5173`):
 - **Cash Flow Dashboard**: Visualizes projected vs. actual inflows, outflows, and net cash positions.
 - **Forecasted P&L**: Dynamic income, COGS, gross margin, and operating expense forecasting.
 - **Zoho Books Reconciliation**: Bank transaction audit trails, pending vendor bills, customer invoices, and payment matching.
@@ -173,8 +173,8 @@ Located at [`frontend/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/fro
 - **Master Data & Assignment**: Customer registries, employee lists, and Sales Order-to-Project milestone planning.
 - **Integration Hub**: UI triggers to execute data syncs on-demand and inspect real-time sync status.
 
-### 2. AIS Insight Flow & Tender Studio (Frontend)
-Located at [`ais-insight-flow-Vercel-main/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/ais-insight-flow-Vercel-main) (Port `5174`):
+### 2. Tower-CEO Tender & Proposal Studio (Frontend)
+Located at [`frontend-tender/`](frontend-cfo/-tender) (Port `5174`):
 - **Tender Engine & RFP Pipeline**: Intake portal for tender briefs, requirements parsing, and submission milestone tracking.
 - **Tender Qualification**: Rigorous Go/No-Go evaluation matrix analyzing technical feasibility, resource capacity, and margin thresholds.
 - **AI Proposal Workspace**: Interactive collaborative editor supporting clause injection, template loading, and dynamic document generation.
@@ -183,22 +183,22 @@ Located at [`ais-insight-flow-Vercel-main/`](file:///C:/Users/ritesh/Downloads/P
 - **Multi-Level Approvals**: Audit trails and sign-off workflows for executive bid approval.
 
 ### 3. CFO & Sales Intelligence Server (Backend)
-Located at [`Backend/cfo_tower/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/Backend/cfo_tower) (Port `3002`):
+Located at [`backend/cfo_tower/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/backend/cfo_tower) (Port `3002`):
 - **FastAPI Core (`cfo_server.py`)**: Asynchronous REST backend hosting conversational AI routers, sync endpoints, and health monitoring.
 - **CFO AI Router (`chat/`)**: Autonomous tool-calling agent querying Supabase financial tables (invoices, expenses, bank balance) to answer complex financial queries.
 - **Sales AI Router (`chat_sales/`)**: Natural language agent analyzing CRM pipeline health, stage durations, and sales rep performance.
 - **Background Sync Scheduler**: Threaded execution pool triggering comprehensive multi-module data synchronization without blocking incoming API calls.
 
 ### 4. AI Gateway & Local CORS Proxy
-Located at [`Backend/proxy.py`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/Backend/proxy.py) (Port `3000`):
+Located at [`backend/proxy.py`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/backend/proxy.py) (Port `3000`):
 - High-performance local HTTP server handling CORS preflight, private network headers, and dynamic reverse proxying:
   - `/v1/*` & `/health` &rarr; Dispatched to Local LLM (Port 8080)
   - `/rag/*` &rarr; Dispatched to RAG Bridge (Port 3001)
   - `/jarvis/*` &rarr; Dispatched to Jarvis Knowledge Server (Port 3004)
-- Serves the standalone [`APNJ-LLM-Studio.html`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/Backend/APNJ-LLM-Studio.html) interface for direct model testing.
+- Serves the standalone [`APNJ-LLM-Studio.html`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/backend/APNJ-LLM-Studio.html) interface for direct model testing.
 
 ### 5. Jarvis RAG & Multi-Modal Knowledge Engine
-Located at [`Backend/rag/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/Backend/rag):
+Located at [`backend/rag/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/backend/rag):
 - **`doc_graph_processor.py`**: Extracts semantic structures, headings, and cross-references from PDFs and DOCX documents.
 - **`excel_graph_processor.py`**: Converts complex multi-sheet financial models and tabular data into queryable vector representations without losing row/column relationships.
 - **`code_graph_processor.py`**: Generates AST-based code graphs for architectural search over internal software repositories.
@@ -206,7 +206,7 @@ Located at [`Backend/rag/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/
 - **`jarvis_watcher.py`**: Filesystem daemon listening for document changes to trigger automated incremental re-indexing.
 
 ### 6. ERP & CRM Data Synchronization Engine
-Located at [`Backend/cfo_tower/integrations/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/Backend/cfo_tower/integrations):
+Located at [`backend/cfo_tower/integrations/`](file:///C:/Users/ritesh/Downloads/Project/CEO-Tower/backend/cfo_tower/integrations):
 - Automated OAuth token lifecycle management (`zoho_auth.py`, `zoho_crm_auth.py`).
 - Granular ETL scripts synchronizing:
   - **Zoho Books**: `zoho_invoices.py`, `zoho_vendor_bills.py`, `zoho_bank_transactions.py`, `zoho_customer_payments.py`, `zoho_vendor_payments.py`, `zoho_expenses.py`, `zoho_sales_orders.py`, `zoho_purchase_orders.py`, `zoho_credit_notes.py`, `zoho_vendor_credits.py`, `zoho_taxes.py`, `zoho_currencies.py`.
@@ -279,7 +279,7 @@ CEO-Tower/
 ├── README.md                       # Comprehensive system architecture & documentation
 ├── .gitignore                      # Root Git ignore rules
 │
-├── frontend/                       # CFO & Sales Control Tower Frontend (Port 5173)
+├── frontend-cfo/                       # CFO & Sales Control Tower Frontend (Port 5173)
 │   ├── src/
 │   │   ├── pages/
 │   │   │   ├── CashFlowDashboard.tsx      # Cash flow forecasts & inflow/outflow
@@ -295,7 +295,7 @@ CEO-Tower/
 │   ├── Dockerfile                         # Production Nginx container build
 │   └── package.json
 │
-├── ais-insight-flow-Vercel-main/   # AI Proposal & Tender Engine Frontend (Port 5174)
+├── frontend-tender/   # AI Proposal & Tender Engine Frontend (Port 5174)
 │   ├── src/
 │   │   ├── pages/
 │   │   │   ├── TenderEnginePage.tsx       # Intake & RFP tracking
@@ -308,7 +308,7 @@ CEO-Tower/
 │   ├── Dockerfile                         # Production Nginx container build
 │   └── package.json
 │
-└── Backend/                        # Python Backend & AI Services
+└── backend/                        # Python Backend & AI Services
     ├── cfo_tower/
     │   ├── cfo_server.py                  # Main FastAPI service (Port 3002)
     │   ├── chat/                          # CFO AI chat service & tool dispatch
@@ -337,9 +337,9 @@ To run the entire suite in isolated containers:
 1. **Verify Prerequisites**:
    - [Docker Desktop](https://www.docker.com/) installed and running.
 2. **Configure Environment**:
-   Ensure `Backend/.env` contains your database and model configurations:
+   Ensure `backend/.env` contains your database and model configurations:
    ```bash
-   cp Backend/.env.example Backend/.env
+   cp backend/.env.example backend/.env
    ```
 3. **Launch the Stack**:
    ```bash
@@ -357,7 +357,7 @@ To run the entire suite in isolated containers:
 
 #### 1. Backend Setup
 ```bash
-cd Backend
+cd backend
 python -m venv venv
 # On Windows:
 venv\Scripts\activate
@@ -378,15 +378,15 @@ pip install -r requirements.txt
 
 #### 2. CFO & Sales Tower Frontend Setup
 ```bash
-cd frontend
+cd frontend-cfo
 npm install
 npm run dev
 ```
 Available at [http://localhost:5173](http://localhost:5173).
 
-#### 3. AIS Insight Flow Tender Studio Setup
+#### 3. Tower-CEO Tender & Proposal Studio Setup
 ```bash
-cd ais-insight-flow-Vercel-main
+cd frontend-tender
 npm install
 npm run dev
 ```
@@ -396,10 +396,10 @@ Available at [http://localhost:5174](http://localhost:5174).
 
 ## Environment Variables Reference
 
-Create a `.env` file in `Backend/` (and corresponding frontend `.env` files):
+Create a `.env` file in `backend/` (and corresponding frontend `.env` files):
 
 ```ini
-# Backend/.env
+# backend/.env
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-supabase-service-key
 SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key

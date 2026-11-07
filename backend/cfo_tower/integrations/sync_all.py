@@ -2,11 +2,11 @@
 Master sync — runs every Zoho Books sync module in the correct order.
 
 USAGE (manual):
-    cd APNJ-LLM-Studio
+    cd backend
     python -m cfo_tower.integrations.sync_all
 
 USAGE (scheduled, via Windows Task Scheduler):
-    See Start-CFO-Sync.bat in the same folder.
+    See scripts/Start-CFO-Sync.bat in backend.
 """
 
 import sys

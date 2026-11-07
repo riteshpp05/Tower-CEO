@@ -3,39 +3,39 @@ version: '3.8'
 services:
   cfo-frontend:
     build:
-      context: ./frontend
+      context: ./frontend-cfo
       dockerfile: Dockerfile
-    image: ndj222/ais-cfo-frontend:latest
+    image: tower-ceo/cfo-frontend:latest
     ports:
       - "5173:80"
     restart: unless-stopped
     networks:
-      - ais-network
+      - tower-network
 
-  insight-frontend:
+  tender-frontend:
     build:
-      context: ./ais-insight-flow-Vercel-main
+      context: ./frontend-tender
       dockerfile: Dockerfile
-    image: ndj222/ais-insight-frontend:latest
+    image: tower-ceo/tender-frontend:latest
     ports:
       - "5174:80"
     restart: unless-stopped
     networks:
-      - ais-network
+      - tower-network
 
   cfo-backend:
     build:
-      context: ./Backend
+      context: ./backend
       dockerfile: Dockerfile
-    image: ndj222/ais-backend:latest
+    image: tower-ceo/backend:latest
     env_file:
-      - ./Backend/.env
+      - ./backend/.env
     command: ["python", "-m", "cfo_tower.cfo_server"]
     ports:
       - "3002:3002"
     restart: unless-stopped
     networks:
-      - ais-network
+      - tower-network
     # Exposing the GPU to the container if Ollama runs locally inside or needs it
     # deploy:
     #   resources:
@@ -47,18 +47,18 @@ services:
 
   proxy-backend:
     build:
-      context: ./Backend
+      context: ./backend
       dockerfile: Dockerfile
-    image: ndj222/ais-backend:latest
+    image: tower-ceo/backend:latest
     env_file:
-      - ./Backend/.env
+      - ./backend/.env
     command: ["python", "proxy.py"]
     ports:
       - "3000:3000"
     restart: unless-stopped
     networks:
-      - ais-network
+      - tower-network
 
 networks:
-  ais-network:
+  tower-network:
     driver: bridge
