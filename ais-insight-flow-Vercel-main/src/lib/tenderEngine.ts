@@ -85,13 +85,13 @@ export interface CoverLetterData {
 }
 
 export const DEFAULT_TENDER_COVER_LETTER: CoverLetterData = {
-  legalName: 'Abhiyanta India Solutions Pvt. Ltd.',
+  legalName: 'Tower-CEO Technologies Pvt. Ltd.',
   corporateStructure: 'Private Limited Company incorporated under the Companies Act, 2013, India',
   contactName: '',
   contactTitle: '',
   contactAddress: '1st Floor, Lohia Jain IT Park, Paud Road, Kothrud, Pune 411038, Maharashtra, India',
   contactPhone: '+91 90280 51760',
-  contactEmail: 'sales@abhiyantatech.com',
+  contactEmail: 'sales@towerceo.com',
   hasSubcontractors: 'none',
   subcontractorDetails: '',
   pendingLitigation: 'none',

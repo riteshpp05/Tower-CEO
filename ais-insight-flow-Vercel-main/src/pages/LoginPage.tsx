@@ -59,7 +59,7 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <h1 className="font-heading text-3xl font-bold text-primary">AIS PIP</h1>
           <p className="text-sm text-muted-foreground mt-1">Proposal Intelligence Platform</p>
-          <p className="text-xs text-muted-foreground mt-0.5">Abhiyanta India Solutions Pvt. Ltd.</p>
+          <p className="text-xs text-muted-foreground mt-0.5">Tower-CEO Technologies Pvt. Ltd.</p>
         </div>
         <Card className="enterprise-shadow-md">
           <CardHeader>
@@ -75,7 +75,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="you@abhiyanta.com"
+                  placeholder="you@towerceo.com"
                   autoComplete="email"
                   disabled={submitting}
                 />
@@ -106,7 +106,7 @@ export default function LoginPage() {
             </form>
           </CardContent>
         </Card>
-        <p className="text-xs text-center text-muted-foreground mt-6">© 2026 Abhiyanta India Solutions Pvt. Ltd. All rights reserved.</p>
+        <p className="text-xs text-center text-muted-foreground mt-6">© 2026 Tower-CEO Technologies Pvt. Ltd. All rights reserved.</p>
       </div>
     </div>
   );

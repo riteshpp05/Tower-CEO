@@ -296,7 +296,7 @@ RISK & CONSTRAINTS:
 // ── Type-specific prompt builders ─────────────────────────────────────────────
 
 function buildImplementationPrompt(inputs: ProposalInputs, context: string): string {
-  return `You are a senior SAP consulting proposal writer at Abhiyanta India Solutions (AIS), an ISO 9001:2015 and ISO/IEC 27001:2022 certified SAP consulting firm based in India.
+  return `You are a senior SAP consulting proposal writer at Tower-CEO Technologies (Tower-CEO), an ISO 9001:2015 and ISO/IEC 27001:2022 certified SAP consulting firm based in India.
 
 Write a professional, client-facing SAP Implementation proposal for the engagement below.
 Use formal business language. Be SPECIFIC — reference the client's actual pain points and requirements.
@@ -350,9 +350,9 @@ function buildAMSPrompt(inputs: ProposalInputs, context: string): string {
   const hasKBDocs = (inputs.presalesBriefing?.kbDocIds?.length ?? 0) > 0;
   const credGuard = hasKBDocs
     ? 'For Company Background and Qualifications: use ONLY content from the Knowledge Base documents retrieved above. Do not invent statistics.'
-    : 'For Company Background: state AIS legal entity (Abhiyanta India Solutions Pvt. Ltd.), offices (Pune HQ, Dubai, Singapore), SAP Gold Partner, ISO 9001:2015 and ISO/IEC 27001:2022 certified. Do NOT invent years of experience, client counts, or revenue figures. For Client References: write "Five client references including three from the last three years are submitted as a separate confidential attachment."';
+    : 'For Company Background: state AIS legal entity (Tower-CEO Technologies Pvt. Ltd.), offices (Pune HQ, Dubai, Singapore), SAP Gold Partner, ISO 9001:2015 and ISO/IEC 27001:2022 certified. Do NOT invent years of experience, client counts, or revenue figures. For Client References: write "Five client references including three from the last three years are submitted as a separate confidential attachment."';
 
-  return `You are a senior SAP consulting proposal writer at Abhiyanta India Solutions (AIS), SAP Gold Partner, ISO 9001:2015 and ISO/IEC 27001:2022 certified.
+  return `You are a senior SAP consulting proposal writer at Tower-CEO Technologies (Tower-CEO), SAP Gold Partner, ISO 9001:2015 and ISO/IEC 27001:2022 certified.
 
 Write a professional, client-facing SAP AMS proposal for ${inputs.clientName}.
 Be SPECIFIC. Use formal business language. Plain prose — no Markdown, no ###, no **, no bullets.
@@ -374,7 +374,7 @@ EXECUTIVE SUMMARY:
 3 paragraphs: (1) Client SAP landscape and support challenges from verified context, (2) AIS proposed AMS model — team, coverage, delivery model, (3) Value proposition: continuity, SLA commitment, cost efficiency, transformation readiness.
 
 COMPANY BACKGROUND:
-AIS legal entity (Abhiyanta India Solutions Pvt. Ltd.), headquarters Pune India with offices in Dubai and Singapore. SAP Gold Partner. ISO 9001:2015 and ISO/IEC 27001:2022 certifications. Financial stability and debt-free operations. No parent or subsidiary companies.
+AIS legal entity (Tower-CEO Technologies Pvt. Ltd.), headquarters Pune India with offices in Dubai and Singapore. SAP Gold Partner. ISO 9001:2015 and ISO/IEC 27001:2022 certifications. Financial stability and debt-free operations. No parent or subsidiary companies.
 
 COMPANY QUALIFICATIONS & TEAM PROFILES:
 AIS qualifications for this engagement: relevant SAP expertise in modules (${inputs.modules.join(', ')}), financial and government sector experience. Proposed team with roles, FTE allocation, module coverage, and seniority level for each role. State that detailed CVs with certification IDs and project history are provided as a separate attachment per RFP requirements.
@@ -419,7 +419,7 @@ function buildResourceAugmentationPrompt(inputs: ProposalInputs, context: string
       ).join('\n')
     : 'Resource profiles to be confirmed';
 
-  return `You are a senior SAP consulting proposal writer at Abhiyanta India Solutions (AIS).
+  return `You are a senior SAP consulting proposal writer at Tower-CEO Technologies (Tower-CEO).
 
 Write a professional resource augmentation proposal for the client below.
 The centrepiece of this proposal is the individual resource profiles — write them in detail.
@@ -458,7 +458,7 @@ Numbered assumptions (minimum 5: client provides workspace/tools/access, AIS ret
 }
 
 function buildSolutionPrompt(inputs: ProposalInputs, context: string): string {
-  return `You are a senior SAP consulting proposal writer at Abhiyanta India Solutions (AIS).
+  return `You are a senior SAP consulting proposal writer at Tower-CEO Technologies (Tower-CEO).
 
 Write a professional proposal for a focused SAP solution/integration/BTP engagement.
 This is a narrowly scoped engagement — be very precise about what is in and out of scope.
@@ -641,7 +641,7 @@ export async function generateSingleSection(
 
     'Governance & Reporting': `Write a Governance & Reporting section for the ${inputs.clientName} AMS engagement. Cover: weekly/monthly/quarterly governance cadence, report types (SLA performance, ticket aging, trends), escalation matrix, change management process for enhancements.`,
 
-    'Company Credentials': `Write a Company Credentials section for Abhiyanta India Solutions (AIS). Include: ISO 9001:2015 and ISO/IEC 27001:2022 certifications, SAP partnership status, years in SAP consulting, AMS expertise, team size, key differentiators. Add 2-3 anonymised reference engagements relevant to ${inputs.industry ?? 'this industry'}.`,
+    'Company Credentials': `Write a Company Credentials section for Tower-CEO Technologies (Tower-CEO). Include: ISO 9001:2015 and ISO/IEC 27001:2022 certifications, SAP partnership status, years in SAP consulting, AMS expertise, team size, key differentiators. Add 2-3 anonymised reference engagements relevant to ${inputs.industry ?? 'this industry'}.`,
 
     // ── Resource Augmentation ──
     'Resource Profiles': `Write detailed professional profiles for each resource being proposed to ${inputs.clientName}. Resources: ${inputs.selectedResources ?? inputs.resourceProfiles?.map(p => p.name).join(', ') ?? 'to be confirmed'}. For each resource: professional summary, SAP expertise, key experience (3-4 bullet points), certifications, availability, engagement rate. Write as polished professional bios.`,
@@ -668,7 +668,7 @@ export async function generateSingleSection(
   const basePrompt = sectionPrompts[sectionName]
     ?? `Write the "${sectionName}" section for a professional SAP consulting proposal for ${inputs.clientName}. LOB: ${inputs.lob}. Modules: ${inputs.modules.join(', ')}. Geography: ${inputs.geography ?? 'India'}. Be specific and client-focused. No generic filler.`;
 
-  const systemPrefix = `You are a senior SAP consulting proposal writer at Abhiyanta India Solutions (AIS), an ISO 9001:2015 and ISO/IEC 27001:2022 certified SAP consulting firm. Write professional, client-facing content only. No internal notes, no generic filler, no placeholders.\n\n${baseContext}\n\n`;
+  const systemPrefix = `You are a senior SAP consulting proposal writer at Tower-CEO Technologies (Tower-CEO), an ISO 9001:2015 and ISO/IEC 27001:2022 certified SAP consulting firm. Write professional, client-facing content only. No internal notes, no generic filler, no placeholders.\n\n${baseContext}\n\n`;
 
   const ragQuestion = `${sectionName} SAP proposal ${inputs.lob} ${inputs.modules.join(' ')} ${inputs.clientName}`;
   const ragContext  = await buildRAGContext(ragQuestion, ragConfig);

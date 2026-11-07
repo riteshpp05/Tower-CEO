@@ -104,7 +104,7 @@ export default function AppShell() {
         <div className="w-7 h-7 rounded-md bg-gradient-to-br from-terra-500 to-terra-700 flex items-center justify-center text-sm">⬡</div>
         <div>
           <div className="text-sm font-semibold">{headerTitle}</div>
-          <div className="text-[11px] text-ink-400">Abhiyanta India Solutions</div>
+          <div className="text-[11px] text-ink-400">Tower-CEO Enterprise</div>
         </div>
 
         {canToggle && (

@@ -72,7 +72,7 @@ export default function LoginPage() {
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-terra-500 to-terra-700 flex items-center justify-center text-xl mb-2">⬡</div>
         <h1 className="text-lg font-semibold text-ink-900 m-0">CFO Ops Control Tower</h1>
         <p className="text-xs text-ink-500 m-0 mb-2 leading-relaxed">
-          Abhiyanta India Solutions — internal ops intelligence
+          Tower-CEO — internal ops intelligence
         </p>
 
         {mode === "signup" && (

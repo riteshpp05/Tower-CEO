@@ -125,7 +125,7 @@ export async function generateCV(resource: DbResource, isClientFacing = true): P
                   shading: { fill: NAVY, type: ShadingType.CLEAR },
                   margins: { top: 120, bottom: 120, left: 200, right: 0 },
                   children: [
-                    new Paragraph({ children: [new TextRun({ text: 'ABHIYANTA INDIA SOLUTIONS', bold: true, size: 22, font: FONT, color: WHITE })] }),
+                    new Paragraph({ children: [new TextRun({ text: 'TOWER-CEO TECHNOLOGIES', bold: true, size: 22, font: FONT, color: WHITE })] }),
                     new Paragraph({ children: [new TextRun({ text: 'SAP Gold Partner  |  ISO 9001:2015  |  ISO/IEC 27001:2022', size: 16, font: FONT, color: 'BDC3C7' })] }),
                   ],
                 }),
@@ -151,7 +151,7 @@ export async function generateCV(resource: DbResource, isClientFacing = true): P
             alignment: AlignmentType.CENTER,
             border: { top: { style: BorderStyle.SINGLE, size: 4, color: BLUE, space: 4 } },
             children: [
-              new TextRun({ text: 'Abhiyanta India Solutions Pvt. Ltd.  |  Pune, India  |  sales@abhiyantatech.com  |  Page ', size: 16, color: GRAY, font: FONT }),
+              new TextRun({ text: 'Tower-CEO Technologies Pvt. Ltd.  |  Pune, India  |  contact@towerceo.com  |  Page ', size: 16, color: GRAY, font: FONT }),
               new TextRun({ children: [PageNumber.CURRENT], size: 16, color: GRAY, font: FONT }),
             ],
           })],

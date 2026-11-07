@@ -15,8 +15,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { FileText, User, Building2, AlertTriangle, CheckCircle } from 'lucide-react';
 
 export interface CoverLetterData {
-  // Proposer identity (AIS — mostly fixed)
-  legalName:            string;  // Abhiyanta India Solutions Pvt. Ltd.
+  // Proposer identity (Tower-CEO — mostly fixed)
+  legalName:            string;  // Tower-CEO Technologies Pvt. Ltd.
   corporateStructure:   string;  // Private Limited Company, India
   // Primary contact
   contactName:          string;
@@ -40,13 +40,13 @@ export interface CoverLetterData {
 }
 
 export const DEFAULT_COVER_LETTER: CoverLetterData = {
-  legalName:            'Abhiyanta India Solutions Pvt. Ltd.',
+  legalName:            'Tower-CEO Technologies Pvt. Ltd.',
   corporateStructure:   'Private Limited Company incorporated under the Companies Act, 2013, India',
   contactName:          '',
   contactTitle:         '',
   contactAddress:       '1st Floor, Lohia Jain IT Park, Paud Road, Kothrud, Pune 411038, Maharashtra, India',
   contactPhone:         '+91 90280 51760',
-  contactEmail:         'sales@abhiyantatech.com',
+  contactEmail:         'sales@towerceo.com',
   hasSubcontractors:    'none',
   subcontractorDetails: '',
   pendingLitigation:    'none',
@@ -129,7 +129,7 @@ export function CoverLetterStep({ data, onChange }: Props) {
             </div>
             <div className="space-y-1.5">
               <Label className="text-xs">Email <span className="text-destructive">*</span></Label>
-              <Input type="email" value={data.contactEmail} onChange={e => upd('contactEmail', e.target.value)} placeholder="name@abhiyantatech.com" className="text-sm" />
+              <Input type="email" value={data.contactEmail} onChange={e => upd('contactEmail', e.target.value)} placeholder="name@towerceo.com" className="text-sm" />
             </div>
             <div className="space-y-1.5">
               <Label className="text-xs">Phone <span className="text-destructive">*</span></Label>

@@ -76,7 +76,7 @@ export async function exportProposalToWord({
 
   // Decode image buffers
   const coverPanel    = b64ToUint8(PROPOSAL_ASSETS.coverPanel.data);
-  const abhiyantaLogo = b64ToUint8(PROPOSAL_ASSETS.abhiyantaLogo.data);
+  const companyLogo = b64ToUint8(PROPOSAL_ASSETS.companyLogo.data);
   const sapGoldBadge  = b64ToUint8(PROPOSAL_ASSETS.sapGoldBadge.data);
   const riseWithSap   = b64ToUint8(PROPOSAL_ASSETS.riseWithSap.data);
   const growWithSap   = b64ToUint8(PROPOSAL_ASSETS.growWithSap.data);
@@ -128,13 +128,13 @@ export async function exportProposalToWord({
               })
             ]
           }),
-          // Abhiyanta logo — top right corner
+          // Company logo — top right corner
           new Paragraph({
             alignment: AlignmentType.RIGHT,
             spacing: { before: 0, after: 80 },
             children: [
               new ImageRun({
-                data: abhiyantaLogo,
+                data: companyLogo,
                 transformation: { width: 170, height: 50 },
                 type: 'png',
               })
@@ -148,11 +148,11 @@ export async function exportProposalToWord({
           // Company name — large, bold, right-aligned
           new Paragraph({
             alignment: AlignmentType.RIGHT, spacing: { before: 600, after: 120 },
-            children: [new TextRun({ text: 'ABHIYANTA INDIA', bold: true, size: 44, font: FONT, color: NAVY })]
+            children: [new TextRun({ text: 'TOWER-CEO', bold: true, size: 44, font: FONT, color: NAVY })]
           }),
           new Paragraph({
             alignment: AlignmentType.RIGHT, spacing: { after: 120 },
-            children: [new TextRun({ text: 'SOLUTIONS', bold: true, size: 44, font: FONT, color: NAVY })]
+            children: [new TextRun({ text: 'ENTERPRISE', bold: true, size: 44, font: FONT, color: NAVY })]
           }),
           // "Proposal for"
           new Paragraph({
@@ -209,7 +209,7 @@ export async function exportProposalToWord({
               tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
               children: [
                 new ImageRun({ data: headerLogo, transformation: { width: 40, height: 36 }, type: 'jpg' }),
-                new TextRun({ text: '  ABHIYANTA INDIA SOLUTIONS PVT. LTD.', bold: true, size: 18, font: FONT, color: NAVY }),
+                new TextRun({ text: '  TOWER-CEO ENTERPRISE PVT. LTD.', bold: true, size: 18, font: FONT, color: NAVY }),
                 new TextRun({ text: '\t', size: 18 }),
                 new ImageRun({ data: sapGoldBadge, transformation: { width: 52, height: 34 }, type: 'png' }),
               ]
@@ -226,7 +226,7 @@ export async function exportProposalToWord({
               border: { top: { style: BorderStyle.SINGLE, size: 6, color: ACCENT, space: 4 } },
               tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
               children: [
-                new TextRun({ text: 'Abhiyanta India Solutions Pvt. Ltd. | Confidential', size: 16, font: FONT, color: GRAY }),
+                new TextRun({ text: 'Tower-CEO Technologies Pvt. Ltd. | Confidential', size: 16, font: FONT, color: GRAY }),
                 new TextRun({ text: '\tPage ', size: 16, font: FONT, color: GRAY }),
                 new TextRun({ children: [PageNumber.CURRENT], size: 16, font: FONT, color: GRAY }),
               ]
@@ -239,7 +239,7 @@ export async function exportProposalToWord({
             width: { size: 9360, type: WidthType.DXA }, columnWidths: [2880, 6480],
             rows: [
               infoRow('Prepared for', proposal.clientName),
-              infoRow('Prepared by', 'Abhiyanta India Solutions Pvt. Ltd.\n1st Floor, Lohia Jain IT Park, Paud Road, Kothrud, Pune 411038, India'),
+              infoRow('Prepared by', 'Tower-CEO Technologies Pvt. Ltd.\n1st Floor, Lohia Jain IT Park, Paud Road, Kothrud, Pune 411038, India'),
               infoRow('Engagement Model', proposal.dealType),
               infoRow('Document Version', `V1.0  |  Date: ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}  |  Valid for 90 days from issue`),
               infoRow('Classification', 'Confidential \u2014 for the addressee\'s evaluation use only'),
@@ -509,7 +509,7 @@ export async function exportProposalToWord({
           new Table({
             width: { size: 9360, type: WidthType.DXA }, columnWidths: [4680, 4680],
             rows: [
-              headerRow([`For and on behalf of ${proposal.clientName}`, 'For and on behalf of Abhiyanta India Solutions Pvt. Ltd.'], [4680, 4680]),
+              headerRow([`For and on behalf of ${proposal.clientName}`, 'For and on behalf of Tower-CEO Technologies Pvt. Ltd.'], [4680, 4680]),
               new TableRow({ children: [ signCell('Name & Designation:'), signCell('Umesh Shinde | Founder & CEO') ] }),
               new TableRow({ children: [ signCell('Signature:'), signCell('') ] }),
               new TableRow({ children: [ signCell('Date:'), signCell('') ] }),
@@ -526,9 +526,9 @@ export async function exportProposalToWord({
               children: [
                 new Paragraph({ children: [new TextRun({ text: 'Engagement Contact', bold: true, size: 22, font: FONT, color: NAVY })] }),
                 new Paragraph({ children: [new TextRun({ text: 'Umesh Shinde  |  Founder & CEO', bold: true, size: 20, font: FONT })] }),
-                new Paragraph({ children: [new TextRun({ text: 'Abhiyanta India Solutions Pvt. Ltd.', size: 20, font: FONT })] }),
+                new Paragraph({ children: [new TextRun({ text: 'Tower-CEO Technologies Pvt. Ltd.', size: 20, font: FONT })] }),
                 new Paragraph({ children: [new TextRun({ text: '1st Floor, Lohia Jain IT Park, Paud Road, Kothrud, Pune 411038, India', size: 18, font: FONT, color: GRAY })] }),
-                new Paragraph({ children: [new TextRun({ text: 'ceo@abhiyantatech.com  |  www.abhiyantatech.com', size: 18, font: FONT, color: ACCENT })] }),
+                new Paragraph({ children: [new TextRun({ text: 'contact@towerceo.com  |  www.towerceo.com', size: 18, font: FONT, color: ACCENT })] }),
                 new Paragraph({ children: [new TextRun({ text: 'Offices: Pune (HQ)  |  Dubai  |  Singapore', italics: true, size: 18, font: FONT, color: GRAY })] }),
               ]
             })]})],

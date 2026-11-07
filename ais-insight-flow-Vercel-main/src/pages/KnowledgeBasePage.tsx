@@ -62,11 +62,11 @@ export default function KnowledgeBasePage() {
 
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile>({
-    legalName: 'Abhiyanta India Solutions Pvt. Ltd.',
+    legalName: 'Tower-CEO Technologies Pvt. Ltd.',
     foundedYear: '', sapPartnerTier: 'SAP Gold Partner',
     isoCertifications: 'ISO 9001:2015, ISO/IEC 27001:2022',
     offices: 'Pune (HQ), Dubai, Singapore',
-    teamSize: '', revenueRange: '', website: 'www.abhiyantatech.com',
+    teamSize: '', revenueRange: '', website: 'www.towerceo.com',
     aboutUs: '',
   });
   const [references, setReferences] = useState<CompanyReference[]>([]);
@@ -220,14 +220,14 @@ export default function KnowledgeBasePage() {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {([
-                  ['legalName', 'Legal Entity Name', 'Abhiyanta India Solutions Pvt. Ltd.'],
+                  ['legalName', 'Legal Entity Name', 'Tower-CEO Technologies Pvt. Ltd.'],
                   ['foundedYear', 'Founded Year', 'e.g. 2012'],
                   ['sapPartnerTier', 'SAP Partnership Tier', 'e.g. SAP Gold Partner'],
                   ['isoCertifications', 'ISO Certifications', 'ISO 9001:2015, ISO/IEC 27001:2022'],
                   ['offices', 'Office Locations', 'e.g. Pune (HQ), Dubai, Singapore'],
                   ['teamSize', 'Team Size', 'e.g. 250+ consultants'],
                   ['revenueRange', 'Annual Revenue Range (for NDA)', 'e.g. INR 50–100 Cr'],
-                  ['website', 'Website', 'www.abhiyantatech.com'],
+                  ['website', 'Website', 'www.towerceo.com'],
                 ] as [string, string, string][]).map(([field, label, ph]) => (
                   <div key={field} className="space-y-1.5">
                     <Label className="text-xs">{label}</Label>
@@ -241,11 +241,11 @@ export default function KnowledgeBasePage() {
                 ))}
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs">About AIS (2–3 sentences for proposals)</Label>
+                <Label className="text-xs">About Tower-CEO (2–3 sentences for proposals)</Label>
                 <Textarea
                   value={companyProfile.aboutUs}
                   onChange={e => setCompanyProfile(prev => ({ ...prev, aboutUs: e.target.value }))}
-                  placeholder="Abhiyanta India Solutions Pvt. Ltd. is a SAP Gold Partner with ISO 9001:2015 and ISO/IEC 27001:2022 certifications, delivering SAP implementations and AMS across India, Middle East and APAC since..."
+                  placeholder="Tower-CEO Technologies Pvt. Ltd. is a SAP Gold Partner with ISO 9001:2015 and ISO/IEC 27001:2022 certifications, delivering SAP implementations and AMS across India, Middle East and APAC since..."
                   className="text-sm min-h-[80px]"
                 />
               </div>
